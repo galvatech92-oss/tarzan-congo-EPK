@@ -348,7 +348,8 @@
                     <p id="track-album" class="text-brand-silver font-tech text-xs md:text-sm mb-4">Single 2025</p>
                     <div class="flex items-center gap-3 mb-4">
                         <span id="current-time" class="text-xs text-brand-silver font-mono">0:00</span>
-                        <input type="range" id="progress" value="0" class="w-full h-2 bg-gray-700 rounded-lg cursor-pointer">
+                        <!-- Input range modificado para manejar el evento de cambio de tiempo -->
+                        <input type="range" id="progress" value="0" class="w-full h-2 bg-gray-700 rounded-lg cursor-pointer" oninput="seekAudio()">
                         <span id="duration" class="text-xs text-brand-silver font-mono">3:45</span>
                     </div>
                     <div class="flex items-center justify-between">
@@ -859,27 +860,55 @@
         lucide.createIcons();
 
         // Music Player Logic
+        // Actualizado con las rutas de archivo correctas en la carpeta MUSICA/
         const tracks = [
-            { title: "What A Wonderful World", album: "Single 2025", duration: "3:45", year: "2025" },
-            { title: "Lo Dudo", album: "Feat. Calmese Banda Brava", duration: "3:30", year: "Single" },
-            { title: "Meskalina", album: "UFO", duration: "4:12", year: "2001" },
-            { title: "Alienígena", album: "UFO", duration: "3:30", year: "2001" },
-            { title: "Bésame", album: "Elementos", duration: "3:55", year: "2004" }
+            { title: "What A Wonderful World", album: "Single 2025", duration: "3:45", year: "2025", file: "MUSICA/What_A_Wonderful_World.mp3" },
+            { title: "Lo Dudo", album: "Feat. Calmese Banda Brava", duration: "3:30", year: "Single", file: "MUSICA/Lo_Dudo.mp3" },
+            { title: "Meskalina", album: "UFO", duration: "4:12", year: "2001", file: "MUSICA/Meskalina.mp3" },
+            { title: "Alienígena", album: "UFO", duration: "3:30", year: "2001", file: "MUSICA/Alienigena.mp3" },
+            { title: "Bésame", album: "Elementos", duration: "3:55", year: "2004", file: "MUSICA/Besame.mp3" }
         ];
+        
         let currentTrackIdx = 0;
         let isPlaying = false;
+        // Instancia de Audio global
+        const audio = new Audio();
+        
+        // Inicializar el primer track sin reproducir
+        audio.src = tracks[0].file;
+
+        // Event listener para actualizar la barra de progreso y tiempo
+        audio.addEventListener('timeupdate', updateProgress);
+        // Event listener para cuando termina la canción (pasa a la siguiente)
+        audio.addEventListener('ended', nextTrack);
 
         function loadTrack(index) {
             currentTrackIdx = index;
             document.getElementById('track-title').innerText = tracks[index].title;
             document.getElementById('track-album').innerText = `${tracks[index].album} (${tracks[index].year})`;
             document.getElementById('duration').innerText = tracks[index].duration;
-            isPlaying = true;
-            updatePlayBtn();
+            
+            // Cargar nueva fuente y reproducir
+            audio.src = tracks[index].file;
+            audio.load();
+            audio.play().then(() => {
+                isPlaying = true;
+                updatePlayBtn();
+            }).catch(error => {
+                console.log("Error al reproducir (posiblemente falta interacción del usuario):", error);
+                isPlaying = false; // Si falla autoplay, mantener estado pausado
+                updatePlayBtn();
+            });
         }
 
         function togglePlay() {
-            isPlaying = !isPlaying;
+            if (audio.paused) {
+                audio.play();
+                isPlaying = true;
+            } else {
+                audio.pause();
+                isPlaying = false;
+            }
             updatePlayBtn();
         }
 
@@ -897,6 +926,30 @@
         function prevTrack() {
             currentTrackIdx = (currentTrackIdx - 1 + tracks.length) % tracks.length;
             loadTrack(currentTrackIdx);
+        }
+
+        // Función para actualizar la barra de progreso visualmente
+        function updateProgress(e) {
+            const { duration, currentTime } = e.srcElement;
+            const progressPercent = (currentTime / duration) * 100;
+            const progress = document.getElementById('progress');
+            
+            if (!isNaN(progressPercent)) {
+                progress.value = progressPercent;
+            }
+            
+            // Actualizar tiempo actual texto
+            let currentMinutes = Math.floor(currentTime / 60);
+            let currentSeconds = Math.floor(currentTime % 60);
+            if (currentSeconds < 10) { currentSeconds = "0" + currentSeconds; }
+            document.getElementById('current-time').innerText = `${currentMinutes}:${currentSeconds}`;
+        }
+
+        // Función para saltar a una parte de la canción al mover la barra
+        function seekAudio() {
+            const progress = document.getElementById('progress');
+            const seekTime = (audio.duration / 100) * progress.value;
+            audio.currentTime = seekTime;
         }
 
         // WhatsApp Logic
