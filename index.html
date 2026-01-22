@@ -290,7 +290,7 @@
                             </li>
                             <li class="flex flex-col gap-1 border-b border-white/10 pb-2">
                                 <strong class="text-brand-red flex items-center gap-2"><i data-lucide="calendar" class="w-3 h-3"></i> Inicio</strong>
-                                <span class="text-gray-300">1996 (Eskalofrío) / 1997 (TC).</span>
+                                <span class="text-gray-300">1997 Tarzan Congo.</span>
                             </li>
                             <li class="flex flex-col gap-1 border-b border-white/10 pb-2">
                                 <strong class="text-brand-red flex items-center gap-2"><i data-lucide="mic-2" class="w-3 h-3"></i> Producción</strong>
@@ -1185,43 +1185,194 @@
         let isPlaying = false;
         // Instancia de Audio global
         const audio = new Audio();
+        // CORRECCIÓN CRÍTICA: Eliminado crossOrigin para permitir reproducción de archivos locales
+        // audio.crossOrigin = "anonymous"; 
         
         // Inicializar el primer track sin reproducir
         audio.src = tracks[0].file;
+
+        // Variables Visualizador
+        let audioContext;
+        let analyser;
+        let source;
+        let canvas, ctx;
+        let dataArray;
+        let visualizerInitialized = false;
+
+        // MANEJO DE ERRORES DE CARGA DE AUDIO
+        audio.addEventListener('error', function(e) {
+            console.error("Error cargando audio:", e);
+            document.getElementById('player-msg').innerText = "ERROR: FILE NOT FOUND";
+            document.getElementById('player-msg').classList.add('text-red-500');
+            isPlaying = false;
+            updatePlayBtn();
+        });
 
         // Event listener para actualizar la barra de progreso y tiempo
         audio.addEventListener('timeupdate', updateProgress);
         // Event listener para cuando termina la canción (pasa a la siguiente)
         audio.addEventListener('ended', nextTrack);
+        // Cuando el audio está listo para reproducirse
+        audio.addEventListener('canplay', function() {
+            document.getElementById('player-msg').innerText = "READY TO ROCK";
+            document.getElementById('player-msg').classList.remove('text-red-500');
+        });
+
+        function initVisualizer() {
+            if (visualizerInitialized) return;
+            
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return; // Navegador no soporta Web Audio API
+
+                audioContext = new AudioContext();
+                analyser = audioContext.createAnalyser();
+                
+                // Conectar fuente
+                // Nota: createMediaElementSource puede fallar con archivos locales por seguridad (CORS)
+                // Usamos un try-catch específico para esto.
+                try {
+                    source = audioContext.createMediaElementSource(audio);
+                    source.connect(analyser);
+                    analyser.connect(audioContext.destination);
+                } catch (err) {
+                    console.warn("Visualizador no disponible para archivos locales (CORS restriction):", err);
+                    // Si falla el visualizador, no detenemos la función, solo no animamos
+                    return;
+                }
+                
+                analyser.fftSize = 256;
+                const bufferLength = analyser.frequencyBinCount;
+                dataArray = new Uint8Array(bufferLength);
+                
+                canvas = document.getElementById('visualizer');
+                ctx = canvas.getContext('2d');
+                
+                // Asegurar tamaño correcto del canvas
+                canvas.width = canvas.offsetWidth;
+                canvas.height = canvas.offsetHeight;
+                
+                visualizerInitialized = true;
+                animateVisualizer();
+            } catch(e) {
+                console.log("Error al iniciar visualizador:", e);
+            }
+        }
+
+        function animateVisualizer() {
+            if (!visualizerInitialized) return;
+            requestAnimationFrame(animateVisualizer);
+            
+            analyser.getByteFrequencyData(dataArray);
+            
+            // Calcular volumen promedio para la vibración
+            let sum = 0;
+            // Usamos un rango de frecuencias bajas/medias para los "beats"
+            for(let i = 0; i < dataArray.length; i++) {
+                sum += dataArray[i];
+            }
+            let average = sum / dataArray.length; // 0 - 255
+            
+            // Limpiar canvas
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Dibujar ADN Vibrante
+            drawDNA(average);
+        }
+
+        let dnaTime = 0;
+        function drawDNA(volume) {
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerY = height / 2;
+            
+            // Factores dinámicos basados en el volumen
+            const amplitudeBase = 15; 
+            const amplitudeDynamic = (volume / 255) * 20; // Vibrate amplitude
+            const totalAmplitude = amplitudeBase + amplitudeDynamic;
+            
+            const speed = 0.05 + (volume * 0.0005); // Velocidad aumenta con el beat
+            dnaTime += speed;
+            
+            ctx.lineWidth = 3;
+            
+            // Dibujar Hélice Horizontal
+            // Iteramos a lo largo del ancho del canvas
+            for (let x = 0; x < width; x += 8) {
+                // Onda Sinusoidal 1 (Cadena Superior)
+                const y1 = centerY + Math.sin(x * 0.03 + dnaTime) * totalAmplitude;
+                // Onda Sinusoidal 2 (Cadena Inferior - Desfasada PI)
+                const y2 = centerY + Math.sin(x * 0.03 + dnaTime + Math.PI) * totalAmplitude;
+                
+                // Dibujar puntos de la cadena
+                // Cadena 1: Rojo
+                ctx.fillStyle = '#CB170F'; 
+                ctx.fillRect(x, y1 - 2, 4, 4);
+                
+                // Cadena 2: Rojo Oscuro (para profundidad)
+                ctx.fillStyle = '#A02C2D';
+                ctx.fillRect(x, y2 - 2, 4, 4);
+                
+                // Dibujar conexiones (Puentes de hidrógeno)
+                // Solo dibujamos algunas líneas para que parezca una escalera rota/ruda
+                if (x % 24 === 0) {
+                    ctx.strokeStyle = `rgba(57, 255, 20, ${0.2 + (volume/350)})`; // Verde tóxico que brilla con el volumen
+                    ctx.beginPath();
+                    ctx.moveTo(x, y1);
+                    ctx.lineTo(x, y2);
+                    ctx.stroke();
+                }
+            }
+        }
 
         function loadTrack(index) {
             currentTrackIdx = index;
             document.getElementById('track-title').innerText = tracks[index].title;
             document.getElementById('track-album').innerText = `${tracks[index].album} (${tracks[index].year})`;
             document.getElementById('duration').innerText = tracks[index].duration;
+            document.getElementById('player-msg').innerText = "LOADING...";
             
-            // Cargar nueva fuente y reproducir
+            // Cargar nueva fuente
             audio.src = tracks[index].file;
             audio.load();
+            
+            // Intentar reproducir
             audio.play().then(() => {
                 isPlaying = true;
                 updatePlayBtn();
+                if (!visualizerInitialized) initVisualizer();
             }).catch(error => {
-                console.log("Error al reproducir (posiblemente falta interacción del usuario):", error);
-                isPlaying = false; // Si falla autoplay, mantener estado pausado
+                console.log("Esperando interacción del usuario para reproducir.");
+                isPlaying = false; 
                 updatePlayBtn();
             });
         }
 
         function togglePlay() {
+            // Aseguramos contexto de audio al interactuar (necesario para navegadores modernos)
+            if (!visualizerInitialized) initVisualizer();
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+
             if (audio.paused) {
-                audio.play();
-                isPlaying = true;
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isPlaying = true;
+                        updatePlayBtn();
+                    }).catch(error => {
+                        console.error("Error al reproducir:", error);
+                        isPlaying = false;
+                        updatePlayBtn();
+                    });
+                }
             } else {
                 audio.pause();
                 isPlaying = false;
+                updatePlayBtn();
             }
-            updatePlayBtn();
         }
 
         function updatePlayBtn() {
@@ -1243,6 +1394,8 @@
         // Función para actualizar la barra de progreso visualmente
         function updateProgress(e) {
             const { duration, currentTime } = e.srcElement;
+            if (isNaN(duration)) return;
+            
             const progressPercent = (currentTime / duration) * 100;
             const progress = document.getElementById('progress');
             
@@ -1260,8 +1413,10 @@
         // Función para saltar a una parte de la canción al mover la barra
         function seekAudio() {
             const progress = document.getElementById('progress');
-            const seekTime = (audio.duration / 100) * progress.value;
-            audio.currentTime = seekTime;
+            if (audio.duration) {
+                const seekTime = (audio.duration / 100) * progress.value;
+                audio.currentTime = seekTime;
+            }
         }
 
         // --- NEW WHATSAPP LOGIC ---
