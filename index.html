@@ -160,12 +160,13 @@
         </div>
     </div>
 
-    <!-- Hero Section Corregido: Fondo Imagen Completa -->
-    <header class="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-16 overflow-hidden">
+    <!-- Hero Section Corregido: Fondo Imagen Móvil Ajustado -->
+    <header class="relative min-h-[85vh] md:min-h-screen flex flex-col items-center justify-center pt-20 pb-16 overflow-hidden bg-brand-black">
         <!-- Imagen de Fondo Principal -->
-        <div class="absolute inset-0 z-0">
-            <img src="IMAGENES/XOCHISKA.jpg" onerror="this.src='https://placehold.co/1920x1080/0F0E0F/CB170F?text=Tarzan+Congo+Background'" alt="Tarzan Congo Live" class="w-full h-full object-cover object-center opacity-70">
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/40 to-brand-black/90"></div>
+        <!-- Móvil: h-[65%] para que no cubra los botones, object-top para ver caras. Desktop: h-full -->
+        <div class="absolute inset-x-0 top-0 h-[65%] md:h-full md:inset-0 z-0">
+            <img src="IMAGENES/XOCHISKA.jpg" onerror="this.src='https://placehold.co/1920x1080/0F0E0F/CB170F?text=Tarzan+Congo+Background'" alt="Tarzan Congo Live" class="w-full h-full object-cover object-top opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/20 to-brand-black"></div>
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(203,23,15,0.2),transparent_70%)] animate-pulse-glow mix-blend-overlay"></div>
         </div>
         
@@ -194,7 +195,7 @@
                 Ska mexicano con electrónica: metales, programación y energía.
             </p>
 
-            <!-- Botones -->
+            <!-- Botones (Ahora quedarán sobre el fondo negro en móvil) -->
             <div class="mt-8 flex flex-col w-full sm:flex-row gap-4 justify-center sm:w-auto px-6 animate-fade-in-up" style="animation-delay: 0.4s;">
                 <a href="#booking" class="w-full sm:w-auto bg-brand-red text-white font-bold py-4 px-10 hover:bg-white hover:text-brand-black transition-all uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm active:scale-95 duration-150 shadow-[0_0_20px_rgba(203,23,15,0.6)] animate-pulse-glow text-lg">
                     <i data-lucide="calendar-check" class="w-6 h-6"></i> CONTRATAR AHORA
