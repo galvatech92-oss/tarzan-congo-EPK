@@ -92,22 +92,18 @@
         }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 2px; cursor: pointer; background: #333; }
         
-        /* Efecto Neón para el menú */
+        /* Estilos Menú Mejorados */
         .nav-link {
             position: relative;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background-color: #CB170F;
-            transition: width 0.3s;
-        }
-        .nav-link:hover::after {
-            width: 100%;
+        .nav-link:hover {
+            background: rgba(203, 23, 15, 0.2);
+            border-color: #CB170F;
+            color: white;
+            box-shadow: 0 0 10px rgba(203, 23, 15, 0.5);
         }
     </style>
 </head>
@@ -126,18 +122,18 @@
                 
                 <!-- Desktop Menu Estilizado -->
                 <div class="hidden md:flex space-x-2 items-center font-slogan text-xs font-bold tracking-widest uppercase">
-                    <a href="#bio" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Historia</a>
-                    <a href="#music" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Música</a>
-                    <a href="#news" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-brand-green hover:text-white">Novedades</a>
-                    <a href="#trajectory" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Tour</a>
-                    <a href="#downloads" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Assets</a>
+                    <a href="#bio" class="nav-link px-4 py-2 rounded-sm text-gray-300">Historia</a>
+                    <a href="#music" class="nav-link px-4 py-2 rounded-sm text-gray-300">Música</a>
+                    <a href="#news" class="nav-link px-4 py-2 rounded-sm text-brand-green">Novedades</a>
+                    <a href="#trajectory" class="nav-link px-4 py-2 rounded-sm text-gray-300">Tour</a>
+                    <a href="#downloads" class="nav-link px-4 py-2 rounded-sm text-gray-300">Assets</a>
                     <a href="#booking" class="bg-brand-red text-white px-6 py-2 hover:bg-white hover:text-brand-red transition-all skew-x-[-10deg] shadow-[4px_4px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
                         <span class="skew-x-[10deg] inline-block">CONTRATAR</span>
                     </a>
                 </div>
 
                 <div class="md:hidden z-50">
-                    <button id="mobile-btn" class="text-brand-white hover:text-brand-red p-2 focus:outline-none active:scale-95 transition-transform bg-white/10 rounded-md">
+                    <button id="mobile-btn" class="text-brand-white hover:text-brand-red p-2 focus:outline-none active:scale-95 transition-transform bg-white/10 rounded-md border border-white/20">
                         <i data-lucide="menu" class="w-8 h-8"></i>
                     </button>
                 </div>
@@ -149,21 +145,26 @@
             <button id="close-menu" class="absolute top-4 right-4 text-brand-silver hover:text-brand-red p-4">
                 <i data-lucide="x" class="w-10 h-10"></i>
             </button>
-            <a href="#bio" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">HISTORIA</a>
-            <a href="#music" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">DISCOGRAFÍA</a>
-            <a href="#news" class="text-4xl font-graffiti text-brand-green hover:text-white mobile-link border-b border-transparent hover:border-brand-green pb-1">NOVEDADES</a>
-            <a href="#trajectory" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">TOUR</a>
-            <a href="#downloads" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">ASSETS</a>
-            <a href="#booking" class="text-4xl font-graffiti bg-brand-red text-white px-6 py-2 transform -rotate-2 mt-4 mobile-link shadow-[5px_5px_0_white]">CONTRATAR</a>
+            <a href="#bio" class="text-3xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">HISTORIA</a>
+            <a href="#music" class="text-3xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">DISCOGRAFÍA</a>
+            <a href="#news" class="text-3xl font-graffiti text-brand-green hover:text-white mobile-link border-b border-transparent hover:border-brand-green pb-1">NOVEDADES</a>
+            <a href="#trajectory" class="text-3xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">TOUR</a>
+            <a href="#downloads" class="text-3xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">ASSETS</a>
+            <a href="#booking" class="text-3xl font-graffiti bg-brand-red text-white px-8 py-3 transform -rotate-2 mt-4 mobile-link shadow-[5px_5px_0_white]">CONTRATAR</a>
         </div>
     </nav>
 
-    <!-- Hero Section Corregido: Imagen arriba de botones -->
-    <header class="relative min-h-screen flex flex-col items-center justify-center pt-24 md:pt-28 pb-10 overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(203,23,15,0.15),transparent_70%)] animate-pulse-glow z-0"></div>
+    <!-- Hero Section Corregido: Fondo Imagen Completa -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center pt-20 pb-16 overflow-hidden">
+        <!-- Imagen de Fondo Principal -->
+        <div class="absolute inset-0 z-0">
+            <img src="IMAGENES/XOCHISKA.jpg" alt="Tarzan Congo Live" class="w-full h-full object-cover object-center opacity-70">
+            <div class="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/40 to-brand-black/90"></div>
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(203,23,15,0.2),transparent_70%)] animate-pulse-glow mix-blend-overlay"></div>
+        </div>
         
-        <!-- Contenedor Principal de la Imagen y Texto -->
-        <div class="relative w-full max-w-5xl mx-auto px-4 z-10 flex flex-col items-center">
+        <!-- Contenido Central -->
+        <div class="relative z-10 w-full max-w-5xl mx-auto px-4 flex flex-col items-center justify-center">
             
             <!-- Badges -->
             <div class="mb-4 flex flex-wrap justify-center gap-2 animate-float">
@@ -178,42 +179,32 @@
                 </span>
             </div>
 
-            <!-- Bloque de Imagen con Texto encima -->
-            <div class="relative w-full rounded-lg overflow-hidden shadow-2xl border border-brand-grey group">
-                <!-- Imagen de fondo sin zoom y contenida/cubierta según necesites, aquí usamos cover para llenar el bloque pero sin zoom excesivo -->
-                <img src="IMAGENES/XOCHISKA.jpg" alt="Tarzan Congo Live" class="w-full h-auto max-h-[60vh] object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-700">
-                
-                <!-- Degradado para legibilidad -->
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/60"></div>
-                
-                <!-- Texto superpuesto -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
-                    <h1 class="font-graffiti text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-brand-white mb-2 text-outline drop-shadow-2xl animate-fade-in-up">
-                        TARZAN<br><span class="text-brand-red">CONGO</span>
-                    </h1>
-                    <p class="font-tech text-sm md:text-xl text-white uppercase tracking-widest max-w-2xl bg-black/50 px-4 py-2 rounded backdrop-blur-sm animate-fade-in-up" style="animation-delay: 0.2s;">
-                        Ska mexicano con electrónica: metales, programación y energía.
-                    </p>
-                </div>
-            </div>
-        </div>
+            <!-- Título -->
+            <h1 class="font-graffiti text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-brand-white mb-2 text-outline drop-shadow-2xl animate-fade-in-up text-center leading-[0.85]">
+                TARZAN<br><span class="text-brand-red">CONGO</span>
+            </h1>
 
-        <!-- Botones DEBAJO de la imagen -->
-        <div class="relative z-20 mt-8 flex flex-col w-full sm:flex-row gap-4 justify-center sm:w-auto px-6">
-            <a href="#booking" class="w-full sm:w-auto bg-brand-red text-white font-bold py-4 px-10 hover:bg-white hover:text-brand-black transition-all uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm active:scale-95 duration-150 shadow-[0_0_20px_rgba(203,23,15,0.6)] animate-pulse-glow text-lg">
-                <i data-lucide="calendar-check" class="w-6 h-6"></i> CONTRATAR AHORA
-            </a>
-            <a href="#downloads" class="w-full sm:w-auto border-2 border-brand-white bg-black/40 backdrop-blur-sm text-white font-bold py-4 px-10 hover:bg-brand-white hover:text-brand-black transition-all uppercase tracking-wider rounded-sm active:scale-95 duration-150 text-lg">
-                <i data-lucide="download" class="inline w-6 h-6 mr-2"></i> PRESS ASSETS
-            </a>
+            <p class="font-tech text-sm md:text-xl text-white uppercase tracking-widest max-w-[90%] md:max-w-2xl bg-black/60 px-4 py-2 rounded backdrop-blur-sm animate-fade-in-up mt-4 text-center border-l-2 border-r-2 border-brand-red" style="animation-delay: 0.2s;">
+                Ska mexicano con electrónica: metales, programación y energía.
+            </p>
+
+            <!-- Botones -->
+            <div class="mt-8 flex flex-col w-full sm:flex-row gap-4 justify-center sm:w-auto px-6 animate-fade-in-up" style="animation-delay: 0.4s;">
+                <a href="#booking" class="w-full sm:w-auto bg-brand-red text-white font-bold py-4 px-10 hover:bg-white hover:text-brand-black transition-all uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm active:scale-95 duration-150 shadow-[0_0_20px_rgba(203,23,15,0.6)] animate-pulse-glow text-lg">
+                    <i data-lucide="calendar-check" class="w-6 h-6"></i> CONTRATAR AHORA
+                </a>
+                <a href="#downloads" class="w-full sm:w-auto border-2 border-brand-white bg-black/40 backdrop-blur-sm text-white font-bold py-4 px-10 hover:bg-brand-white hover:text-brand-black transition-all uppercase tracking-wider rounded-sm active:scale-95 duration-150 text-lg flex items-center justify-center gap-2">
+                    <i data-lucide="download" class="w-6 h-6"></i> PRESS ASSETS
+                </a>
+            </div>
         </div>
         
         <!-- News Ticker -->
         <div id="news" class="absolute bottom-0 w-full bg-brand-green/10 border-t border-brand-green/30 py-2 md:py-3 overflow-hidden backdrop-blur-sm z-30">
-            <div class="whitespace-nowrap animate-ticker inline-block text-xs md:text-base tracking-wide">
-                <span class="text-brand-green font-bold font-tech mx-4">⚡SKA • SKA MEXICANO • SKA PUNK • REGGAE • PUNK • FUSIÓN AFROLATINA⚡</span>
+            <div class="whitespace-nowrap animate-ticker inline-block text-xs md:text-base tracking-wide font-bold">
+                <span class="text-brand-green font-tech mx-4">⚡SKA • SKA MEXICANO • SKA PUNK • REGGAE • PUNK • FUSIÓN AFROLATINA⚡</span>
                 <span class="text-brand-white font-tech mx-4">SECUENCIAS ELECTRÓNICAS • VIEJA ESCUELA DEL SKA MEXICANO • SEGUNDA OLA DEL SKA</span>
-                <span class="text-brand-green font-bold font-tech mx-4">⚡ SINGLE: WHAT A WONDERFUL WORLD ⚡</span>
+                <span class="text-brand-green font-tech mx-4">⚡ SINGLE: WHAT A WONDERFUL WORLD ⚡</span>
                 <span class="text-brand-white font-tech mx-4">SHOWS MASIVOS Y GIRAS • REGRESO POR DEMANDA DEL PÚBLICO</span>
             </div>
         </div>
@@ -560,47 +551,47 @@
                         <!-- Dates -->
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">DIC 1996</span>
-                            <span class="font-tech text-gray-800">Primer toquín: La Viuda (Toreo).</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Primer toquín: La Viuda (Toreo).</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">29 MAY 99</span>
-                            <span class="font-tech text-gray-800">Babel "El Lugar del Rock".</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Babel "El Lugar del Rock".</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">17 JUN 01</span>
-                            <span class="font-tech text-gray-800">Adiós Adiós por Europa (Alicia).</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Adiós Adiós por Europa (Alicia).</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">02 SEP 01</span>
-                            <span class="font-tech text-gray-800">Gran Skándalo.</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Gran Skándalo.</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">27 NOV 04</span>
-                            <span class="font-tech text-gray-800">Presentación "Homenaje Maldito".</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Presentación "Homenaje Maldito".</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">29 JUL 23</span>
-                            <span class="font-tech text-gray-800">29 Años Royal Club.</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">29 Años Royal Club.</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">06 SEP 25</span>
-                            <span class="font-tech text-gray-800">Xochiska.</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Xochiska.</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 bg-brand-green/10 hover:bg-brand-green/20 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-green w-20 shrink-0">19 SEP 25</span>
-                            <span class="font-tech text-gray-800">Festival Vientos Calma (Colombia).</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Festival Vientos Calma (Colombia).</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 bg-brand-green/10 hover:bg-brand-green/20 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-green w-20 shrink-0">21 SEP 25</span>
-                            <span class="font-tech text-gray-800">Festival Green Clouds (Colombia).</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Festival Green Clouds (Colombia).</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">17 OCT 25</span>
-                            <span class="font-tech text-gray-800">Festival Coyote.</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Festival Coyote.</span>
                         </div>
                         <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">20 DIC 25</span>
-                            <span class="font-tech text-gray-800">Xochiska Navideño.</span>
+                            <span class="font-tech text-gray-800 break-words flex-1 min-w-0">Xochiska Navideño.</span>
                         </div>
                     </div>
 
