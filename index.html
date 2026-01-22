@@ -39,7 +39,7 @@
                         'pulse-glow': 'pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'spin-slow': 'spin 12s linear infinite',
                         'slide-up': 'slideUp 0.8s ease-out forwards',
-                        'ticker': 'ticker 40s linear infinite',
+                        'ticker': 'ticker 40s linear infinite', /* Duración ajustada */
                         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
                     },
                     keyframes: {
@@ -56,7 +56,7 @@
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
                         ticker: {
-                            '0%': { transform: 'translateX(100%)' },
+                            '0%': { transform: 'translateX(0)' }, /* CORRECCIÓN: Inicia visible inmediatamente */
                             '100%': { transform: 'translateX(-100%)' }
                         }
                     }
@@ -604,30 +604,46 @@
                         </div>
                     </div>
 
-                    <!-- GALERÍA HISTÓRICA INSERTADA (NUEVA - Full Flyers) -->
+                    <!-- GALERÍA HISTÓRICA REEMPLAZADA CON FLYERS -->
                     <div class="mt-6 border-t border-gray-300 pt-4 w-full">
                         <h4 class="font-bold font-slogan uppercase text-sm mb-3 text-brand-black flex items-center gap-2">
-                            <i data-lucide="camera" class="w-4 h-4 text-brand-red"></i> Archivo Visual
+                            <i data-lucide="camera" class="w-4 h-4 text-brand-red"></i> Flyers Eventos
                         </h4>
                         <!-- Corrección del scroll: w-full y asegurando que overflow-x funcione -->
                         <div class="flex w-full overflow-x-auto gap-3 pb-2 custom-scrollbar snap-x snap-mandatory h-48 md:h-56">
+                            <!-- Flyers Específicos -->
                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
-                                <img src="IMAGENES/REUNION_FUERZAS.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Reunion+Fuerzas'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Reunión de Fuerzas">
+                                <img src="EVENTOS/29_ANOS_ROYAL.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=29+Anos+Royal'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="29 Años Royal">
                             </div>
                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
-                                <img src="IMAGENES/REVISTA_NUESTROROCK.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Revista+NR'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Revista Nuestro Rock">
+                                <img src="EVENTOS/ADIOS_ADIOS_PE.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Adios+Adios'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Adios Adios">
                             </div>
                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
-                                <img src="IMAGENES/TOKIN.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Tokin+1'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Tokin Histórico 1">
+                                <img src="EVENTOS/BABEL.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Babel'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Babel">
                             </div>
                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
-                                <img src="IMAGENES/TOKIN2.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Tokin+2'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Tokin Histórico 2">
+                                <img src="EVENTOS/FESTIVAL_COYOTE.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Coyote'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Festival Coyote">
                             </div>
                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
-                                <img src="IMAGENES/TOKIN3.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Tokin+3'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Tokin Histórico 3">
+                                <img src="EVENTOS/FESTIVAL_GREEN_CLOUDS_COLOMBIA.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Green+Clouds'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Green Clouds Colombia">
+                            </div>
+                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
+                                <img src="EVENTOS/GRAN_SKANDALO.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Gran+Skandalo'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Gran Skandalo">
                             </div>
                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
-                                <img src="IMAGENES/XOCHISKAA.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Xochiska'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Xochiska">
+                                <img src="EVENTOS/HOMENAJE_MALDITO.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Homenaje+Maldito'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Homenaje Maldito">
+                            </div>
+                             <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
+                                <img src="EVENTOS/LO_DUDO.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Lo+Dudo'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Lo Dudo">
+                            </div>
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
+                                <img src="EVENTOS/MASIVO_CU.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Masivo+CU'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Masivo CU">
+                            </div>
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
+                                <img src="EVENTOS/VIENTOS_CALMA_COLOMBIA.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Vientos+Calma'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Vientos Calma">
+                            </div>
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center shrink-0" onclick="openLightbox(this)">
+                                <img src="EVENTOS/XOCHISKA_NAV.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Xochiska+Nav'" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Xochiska Navideño">
                             </div>
                         </div>
                     </div>
@@ -752,7 +768,7 @@
     <section id="downloads" class="py-12 md:py-16 bg-brand-grey border-t border-brand-black">
         <div class="max-w-6xl mx-auto px-4 text-center">
             <h2 class="font-graffiti text-3xl md:text-4xl text-brand-white mb-6">PRESS ASSETS</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <a href="#" class="bg-brand-black p-4 border border-brand-silver/10 active:border-brand-red rounded flex flex-col items-center justify-center h-32 active:scale-95 transition-transform shadow-lg">
                     <i data-lucide="download-cloud" class="w-8 h-8 text-brand-red mb-2"></i>
                     <span class="font-bold text-white text-xs">FULL PRESS KIT</span>
@@ -773,6 +789,31 @@
                     <span class="font-bold text-white text-xs">LOGOS</span>
                     <span class="text-[10px] text-gray-500">PNG</span>
                 </a>
+            </div>
+            
+            <!-- SECCIÓN NUEVA: GALERÍA FOTOS DE PRENSA (MOVIDO DE ARCHIVO VISUAL) -->
+            <div class="bg-brand-black/50 p-4 md:p-6 rounded-lg border border-brand-silver/10">
+                 <h3 class="font-graffiti text-2xl text-brand-white mb-4 text-left border-b border-brand-red/50 pb-2">FOTOS</h3>
+                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="aspect-square bg-black overflow-hidden rounded cursor-pointer border border-white/10 hover:border-brand-red transition-all" onclick="openLightbox(this)">
+                        <img src="IMAGENES/REUNION_FUERZAS.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Foto1'" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="aspect-square bg-black overflow-hidden rounded cursor-pointer border border-white/10 hover:border-brand-red transition-all" onclick="openLightbox(this)">
+                        <img src="IMAGENES/REVISTA_NUESTROROCK.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Foto2'" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="aspect-square bg-black overflow-hidden rounded cursor-pointer border border-white/10 hover:border-brand-red transition-all" onclick="openLightbox(this)">
+                        <img src="IMAGENES/TOKIN.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Foto3'" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="aspect-square bg-black overflow-hidden rounded cursor-pointer border border-white/10 hover:border-brand-red transition-all" onclick="openLightbox(this)">
+                        <img src="IMAGENES/TOKIN2.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Foto4'" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="aspect-square bg-black overflow-hidden rounded cursor-pointer border border-white/10 hover:border-brand-red transition-all" onclick="openLightbox(this)">
+                        <img src="IMAGENES/TOKIN3.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Foto5'" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="aspect-square bg-black overflow-hidden rounded cursor-pointer border border-white/10 hover:border-brand-red transition-all" onclick="openLightbox(this)">
+                        <img src="IMAGENES/XOCHISKAA.jpg" onerror="this.src='https://placehold.co/300x400/1F1E1F/CB170F?text=Foto6'" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                    </div>
+                 </div>
             </div>
         </div>
     </section>
