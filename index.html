@@ -15,7 +15,7 @@
             theme: {
                 extend: {
                     screens: {
-                        'xs': '375px', // Breakpoint extra para móviles muy pequeños
+                        'xs': '375px',
                     },
                     colors: {
                         'brand-black': '#0F0E0F',
@@ -40,6 +40,7 @@
                         'spin-slow': 'spin 12s linear infinite',
                         'slide-up': 'slideUp 0.8s ease-out forwards',
                         'ticker': 'ticker 40s linear infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
                     },
                     keyframes: {
                         float: {
@@ -47,6 +48,10 @@
                             '50%': { transform: 'translateY(-10px)' },
                         },
                         slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
                         },
@@ -66,7 +71,6 @@
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
-        /* Texto responsive */
         .text-outline { 
             text-shadow: 2px 2px 0 #CB170F; 
         }
@@ -87,33 +91,53 @@
             background: #CB170F; cursor: pointer; margin-top: -6px;
         }
         input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 2px; cursor: pointer; background: #333; }
+        
+        /* Efecto Neón para el menú */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #CB170F;
+            transition: width 0.3s;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
     </style>
 </head>
 <body class="font-tech selection:bg-brand-red selection:text-brand-white bg-noise pb-20 md:pb-0">
 
-    <!-- Navegación -->
-    <nav class="fixed w-full z-50 bg-brand-black/95 backdrop-blur-md border-b border-brand-red/30 transition-all duration-300" id="navbar">
+    <!-- Navegación con Estilo -->
+    <nav class="fixed w-full z-50 bg-brand-black/95 backdrop-blur-md border-b border-brand-red/50 shadow-[0_4px_20px_rgba(0,0,0,0.8)] transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <a href="#" class="flex items-center gap-2 group z-50">
-                    <span class="font-graffiti text-xl md:text-3xl text-brand-white tracking-wider group-hover:text-brand-red transition-colors">
+                    <!-- Logo simulado texto -->
+                    <span class="font-graffiti text-xl md:text-3xl text-brand-white tracking-wider group-hover:text-brand-red transition-colors drop-shadow-md">
                         TARZAN CONGO
                     </span>
                 </a>
                 
-                <div class="hidden md:flex space-x-6 items-center font-slogan text-xs font-bold tracking-widest uppercase">
-                    <a href="#bio" class="hover:text-brand-red transition-all">Historia</a>
-                    <a href="#music" class="hover:text-brand-red transition-all">Música</a>
-                    <a href="#news" class="hover:text-brand-red transition-all text-brand-green">Novedades</a>
-                    <a href="#trajectory" class="hover:text-brand-red transition-all">Tour</a>
-                    <a href="#downloads" class="hover:text-brand-red transition-all">Assets</a>
-                    <a href="#booking" class="bg-brand-red text-white px-5 py-2 hover:bg-white hover:text-brand-red transition-all skew-x-[-10deg]">
+                <!-- Desktop Menu Estilizado -->
+                <div class="hidden md:flex space-x-2 items-center font-slogan text-xs font-bold tracking-widest uppercase">
+                    <a href="#bio" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Historia</a>
+                    <a href="#music" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Música</a>
+                    <a href="#news" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-brand-green hover:text-white">Novedades</a>
+                    <a href="#trajectory" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Tour</a>
+                    <a href="#downloads" class="nav-link px-4 py-2 hover:bg-white/5 rounded transition-all text-gray-300 hover:text-white">Assets</a>
+                    <a href="#booking" class="bg-brand-red text-white px-6 py-2 hover:bg-white hover:text-brand-red transition-all skew-x-[-10deg] shadow-[4px_4px_0px_rgba(255,255,255,0.2)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px]">
                         <span class="skew-x-[10deg] inline-block">CONTRATAR</span>
                     </a>
                 </div>
 
                 <div class="md:hidden z-50">
-                    <button id="mobile-btn" class="text-brand-white hover:text-brand-red p-2 focus:outline-none active:scale-95 transition-transform">
+                    <button id="mobile-btn" class="text-brand-white hover:text-brand-red p-2 focus:outline-none active:scale-95 transition-transform bg-white/10 rounded-md">
                         <i data-lucide="menu" class="w-8 h-8"></i>
                     </button>
                 </div>
@@ -121,31 +145,28 @@
         </div>
         
         <!-- Menú Móvil Fullscreen -->
-        <div id="mobile-menu" class="fixed inset-0 bg-brand-black z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-6 md:hidden">
+        <div id="mobile-menu" class="fixed inset-0 bg-brand-black/98 z-40 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center gap-6 md:hidden">
             <button id="close-menu" class="absolute top-4 right-4 text-brand-silver hover:text-brand-red p-4">
                 <i data-lucide="x" class="w-10 h-10"></i>
             </button>
-            <a href="#bio" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link">HISTORIA</a>
-            <a href="#music" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link">DISCOGRAFÍA</a>
-            <a href="#news" class="text-4xl font-graffiti text-brand-green hover:text-white mobile-link">NOVEDADES</a>
-            <a href="#trajectory" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link">TOUR</a>
-            <a href="#downloads" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link">ASSETS</a>
-            <a href="#booking" class="text-4xl font-graffiti text-brand-red border-b-4 border-brand-red mobile-link mt-4">CONTRATAR</a>
+            <a href="#bio" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">HISTORIA</a>
+            <a href="#music" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">DISCOGRAFÍA</a>
+            <a href="#news" class="text-4xl font-graffiti text-brand-green hover:text-white mobile-link border-b border-transparent hover:border-brand-green pb-1">NOVEDADES</a>
+            <a href="#trajectory" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">TOUR</a>
+            <a href="#downloads" class="text-4xl font-graffiti text-white hover:text-brand-red mobile-link border-b border-transparent hover:border-brand-red pb-1">ASSETS</a>
+            <a href="#booking" class="text-4xl font-graffiti bg-brand-red text-white px-6 py-2 transform -rotate-2 mt-4 mobile-link shadow-[5px_5px_0_white]">CONTRATAR</a>
         </div>
     </nav>
 
-    <!-- Hero Section Optimizado -->
-    <header class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 md:pt-20 pb-20">
-        <!-- Fondo Imagen XOCHISKA -->
-        <div class="absolute inset-0 z-0">
-            <img src="IMAGENES/XOCHISKA.jpg" alt="Background Live" class="w-full h-full object-cover opacity-60">
-            <!-- Degradado Sutil -->
-            <div class="absolute inset-0 bg-gradient-to-b from-brand-black/70 via-transparent to-brand-black/90"></div>
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(203,23,15,0.1),transparent_70%)] animate-pulse-glow mix-blend-overlay"></div>
-        </div>
+    <!-- Hero Section Corregido: Imagen arriba de botones -->
+    <header class="relative min-h-screen flex flex-col items-center justify-center pt-24 md:pt-28 pb-10 overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(203,23,15,0.15),transparent_70%)] animate-pulse-glow z-0"></div>
         
-        <div class="relative z-10 text-center px-4 max-w-4xl w-full flex flex-col items-center justify-center">
-            <div class="mb-4 md:mb-6 flex flex-wrap justify-center gap-2 animate-float scale-90 md:scale-100">
+        <!-- Contenedor Principal de la Imagen y Texto -->
+        <div class="relative w-full max-w-5xl mx-auto px-4 z-10 flex flex-col items-center">
+            
+            <!-- Badges -->
+            <div class="mb-4 flex flex-wrap justify-center gap-2 animate-float">
                 <span class="bg-brand-black/80 border border-brand-white px-3 py-1 text-[10px] md:text-xs font-bold tracking-widest text-brand-white uppercase backdrop-blur-sm">
                     EST. 1997
                 </span>
@@ -157,27 +178,39 @@
                 </span>
             </div>
 
-            <h1 class="font-graffiti text-[3.5rem] leading-[0.9] sm:text-7xl md:text-9xl text-brand-white mb-4 text-outline relative inline-block drop-shadow-2xl">
-                TARZAN<br><span class="text-brand-red">CONGO</span>
-            </h1>
-
-            <p class="font-tech text-base md:text-xl text-brand-white uppercase tracking-widest mb-8 max-w-[95%] md:max-w-3xl mx-auto pt-4 mt-2 leading-relaxed drop-shadow-md">
-                Ska mexicano con electrónica: metales, programación y energía de escenario.
-            </p>
-            
-            <div class="flex flex-col w-full sm:flex-row gap-4 justify-center sm:w-auto px-4 relative z-20">
-                <a href="#booking" class="w-full sm:w-auto bg-brand-red text-white font-bold py-4 px-8 hover:bg-white hover:text-brand-black transition-all uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm active:scale-95 duration-150 shadow-[0_0_15px_rgba(203,23,15,0.5)]">
-                    <i data-lucide="calendar-check" class="w-5 h-5"></i> CONTRATAR AHORA
-                </a>
-                <a href="#downloads" class="w-full sm:w-auto border-2 border-brand-white bg-black/30 backdrop-blur-sm text-white font-bold py-4 px-8 hover:bg-brand-white hover:text-brand-black transition-all uppercase tracking-wider rounded-sm active:scale-95 duration-150">
-                    <i data-lucide="download" class="inline w-5 h-5 mr-2"></i> PRESS ASSETS
-                </a>
+            <!-- Bloque de Imagen con Texto encima -->
+            <div class="relative w-full rounded-lg overflow-hidden shadow-2xl border border-brand-grey group">
+                <!-- Imagen de fondo sin zoom y contenida/cubierta según necesites, aquí usamos cover para llenar el bloque pero sin zoom excesivo -->
+                <img src="IMAGENES/XOCHISKA.jpg" alt="Tarzan Congo Live" class="w-full h-auto max-h-[60vh] object-cover object-top opacity-80 group-hover:opacity-100 transition-opacity duration-700">
+                
+                <!-- Degradado para legibilidad -->
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-transparent to-brand-black/60"></div>
+                
+                <!-- Texto superpuesto -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-center p-4">
+                    <h1 class="font-graffiti text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-brand-white mb-2 text-outline drop-shadow-2xl animate-fade-in-up">
+                        TARZAN<br><span class="text-brand-red">CONGO</span>
+                    </h1>
+                    <p class="font-tech text-sm md:text-xl text-white uppercase tracking-widest max-w-2xl bg-black/50 px-4 py-2 rounded backdrop-blur-sm animate-fade-in-up" style="animation-delay: 0.2s;">
+                        Ska mexicano con electrónica: metales, programación y energía.
+                    </p>
+                </div>
             </div>
+        </div>
+
+        <!-- Botones DEBAJO de la imagen -->
+        <div class="relative z-20 mt-8 flex flex-col w-full sm:flex-row gap-4 justify-center sm:w-auto px-6">
+            <a href="#booking" class="w-full sm:w-auto bg-brand-red text-white font-bold py-4 px-10 hover:bg-white hover:text-brand-black transition-all uppercase tracking-wider flex items-center justify-center gap-2 rounded-sm active:scale-95 duration-150 shadow-[0_0_20px_rgba(203,23,15,0.6)] animate-pulse-glow text-lg">
+                <i data-lucide="calendar-check" class="w-6 h-6"></i> CONTRATAR AHORA
+            </a>
+            <a href="#downloads" class="w-full sm:w-auto border-2 border-brand-white bg-black/40 backdrop-blur-sm text-white font-bold py-4 px-10 hover:bg-brand-white hover:text-brand-black transition-all uppercase tracking-wider rounded-sm active:scale-95 duration-150 text-lg">
+                <i data-lucide="download" class="inline w-6 h-6 mr-2"></i> PRESS ASSETS
+            </a>
         </div>
         
         <!-- News Ticker -->
         <div id="news" class="absolute bottom-0 w-full bg-brand-green/10 border-t border-brand-green/30 py-2 md:py-3 overflow-hidden backdrop-blur-sm z-30">
-            <div class="whitespace-nowrap animate-ticker inline-block text-sm md:text-base">
+            <div class="whitespace-nowrap animate-ticker inline-block text-xs md:text-base tracking-wide">
                 <span class="text-brand-green font-bold font-tech mx-4">⚡SKA • SKA MEXICANO • SKA PUNK • REGGAE • PUNK • FUSIÓN AFROLATINA⚡</span>
                 <span class="text-brand-white font-tech mx-4">SECUENCIAS ELECTRÓNICAS • VIEJA ESCUELA DEL SKA MEXICANO • SEGUNDA OLA DEL SKA</span>
                 <span class="text-brand-green font-bold font-tech mx-4">⚡ SINGLE: WHAT A WONDERFUL WORLD ⚡</span>
@@ -187,12 +220,12 @@
     </header>
 
     <!-- Bio Section -->
-    <section id="bio" class="py-12 md:py-20 relative bg-brand-white text-brand-black">
+    <section id="bio" class="py-12 md:py-16 relative bg-brand-white text-brand-black">
         <div class="max-w-6xl mx-auto px-4">
             <div class="flex flex-col-reverse md:grid md:grid-cols-12 gap-8 md:gap-12">
                 <!-- Columna Izquierda: Datos Rápidos -->
                 <div class="md:col-span-4 relative mt-4 md:mt-0">
-                    <div class="bg-brand-black p-5 md:p-6 text-brand-white shadow-[6px_6px_0_#CB170F] mb-6">
+                    <div class="bg-brand-black p-5 md:p-6 text-brand-white shadow-[6px_6px_0_#CB170F] mb-6 rounded-sm">
                         <h3 class="font-slogan font-black text-lg md:text-xl mb-4 text-brand-red uppercase border-b border-brand-grey pb-2">Datos Clave</h3>
                         <ul class="space-y-3 font-tech text-sm">
                             <li class="flex flex-col gap-1 border-b border-gray-800 pb-2">
@@ -222,8 +255,8 @@
                 <!-- Columna Derecha: Historia -->
                 <div class="md:col-span-8">
                     <div class="flex flex-col gap-4 mb-6">
-                        <h2 class="font-graffiti text-4xl md:text-5xl text-brand-black text-center md:text-left">HISTORIA OFICIAL</h2>
-                        <button onclick="copyBio()" class="w-full md:w-auto bg-brand-grey text-white text-xs px-4 py-3 md:py-2 flex items-center justify-center gap-2 hover:bg-brand-red transition-colors rounded active:scale-95">
+                        <h2 class="font-graffiti text-4xl md:text-5xl text-brand-black text-center md:text-left drop-shadow-md">HISTORIA OFICIAL</h2>
+                        <button onclick="copyBio()" class="w-full md:w-auto bg-brand-grey text-white text-xs px-4 py-3 md:py-2 flex items-center justify-center gap-2 hover:bg-brand-red transition-colors rounded active:scale-95 shadow-md">
                             <i data-lucide="copy" class="w-4 h-4"></i> COPIAR TEXTO
                         </button>
                     </div>
@@ -236,14 +269,15 @@
                     </div>
 
                     <!-- Bio Corta -->
-                    <div id="content-short" class="animate-slide-up">
+                    <div id="content-short" class="animate-fade-in-up">
                         <p id="bio-text-short" class="font-tech text-base md:text-xl text-gray-800 leading-relaxed font-medium text-justify">
                             Tarzan Congo es una banda mexicana formada en 1997 (con núcleo previo desde 1996), reconocida por fusionar ska con electrónica y una propuesta conceptual futurista. Desde finales de los 90 incorporaron secuencias, teclados, samplers y programación como parte central del sonido, llevando esa exploración al formato en vivo. Su catálogo incluye trabajos clave como <em>UFO</em> (Prod. Sax) y <em>Elementos</em>, además de la compilación <em>Vitalogía</em> (1997–2010). En años recientes han mantenido actividad con presentaciones, la bioserie documental "Reunión de Fuerzas" y nuevos lanzamientos.
                         </p>
                     </div>
 
                     <!-- Bio Larga -->
-                    <div id="content-long" class="hidden animate-slide-up text-gray-800 font-tech text-sm md:text-lg h-[400px] md:h-[600px] overflow-y-auto pr-2 custom-scrollbar text-justify space-y-6">
+                    <div id="content-long" class="hidden animate-fade-in-up text-gray-800 font-tech text-sm md:text-lg h-[400px] md:h-[600px] overflow-y-auto pr-2 custom-scrollbar text-justify space-y-6">
+                        <!-- ...Contenido Bio Larga sin cambios... -->
                         <div class="relative pl-4 border-l-4 border-brand-red">
                             <h4 class="font-black text-brand-black text-lg md:text-xl mb-1">1996: Eskalofrío y La Viuda</h4>
                             <p>Verano de 1996: Inicia el núcleo previo "Eskalofrío" en el circuito de Lomas de Cartagena (Tultitlán). Su primer gran toquín fue en diciembre de 1996 en <strong>"La Viuda" (Toreo)</strong>, tocando ante público real por primera vez.</p>
@@ -279,7 +313,7 @@
                     </div>
 
                     <!-- Novedades -->
-                    <div id="content-news" class="hidden animate-slide-up bg-brand-green/10 p-4 md:p-6 border border-brand-green rounded">
+                    <div id="content-news" class="hidden animate-fade-in-up bg-brand-green/10 p-4 md:p-6 border border-brand-green rounded shadow-lg">
                         <h4 class="font-graffiti text-2xl md:text-3xl text-brand-green mb-2">¡COMUNICADO OFICIAL!</h4>
                         <p class="font-tech text-base md:text-lg font-bold mb-2">22 DE NOVIEMBRE DE 2025</p>
                         <p class="font-tech text-gray-800 mb-4 text-sm md:text-base">
@@ -302,13 +336,12 @@
     <!-- Reproductor -->
     <section id="music" class="py-12 md:py-16 bg-[#0a0a0a] border-y border-brand-red/20">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="font-graffiti text-3xl md:text-4xl text-brand-white mb-6 md:mb-8 flex items-center gap-3">
+            <h2 class="font-graffiti text-3xl md:text-4xl text-brand-white mb-6 md:mb-8 flex items-center justify-center md:justify-start gap-3">
                 <i data-lucide="disc" class="animate-spin-slow text-brand-red"></i> SONIDO OFICIAL
             </h2>
             
-            <div class="bg-brand-grey p-4 md:p-6 rounded-lg shadow-lg border border-brand-silver/10 flex flex-col md:flex-row gap-6 items-center">
-                <div class="w-full md:w-48 aspect-video md:h-48 bg-black relative shrink-0 shadow-[0_0_15px_#CB170F] group">
-                    <!-- Changed maxresdefault to hqdefault to fix broken image -->
+            <div class="bg-brand-grey p-4 md:p-6 rounded-lg shadow-2xl border border-brand-silver/10 flex flex-col md:flex-row gap-6 items-center">
+                <div class="w-full md:w-48 aspect-video md:h-48 bg-black relative shrink-0 shadow-[0_0_20px_#CB170F]">
                     <img id="track-art" src="https://img.youtube.com/vi/usWChBR2jzA/hqdefault.jpg" class="w-full h-full object-cover opacity-80 mix-blend-overlay">
                     <div class="absolute top-2 left-2 bg-brand-red text-white text-[10px] px-2 py-1 font-bold animate-pulse">ON AIR</div>
                 </div>
@@ -322,49 +355,49 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-6 mx-auto md:mx-0">
-                            <button onclick="prevTrack()" class="text-brand-silver hover:text-white p-2"><i data-lucide="skip-back" class="w-6 h-6"></i></button>
-                            <button onclick="togglePlay()" id="play-btn" class="w-14 h-14 bg-brand-red rounded-full flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform shadow-[0_0_10px_#CB170F]">
+                            <button onclick="prevTrack()" class="text-brand-silver hover:text-white p-2 transform active:scale-90"><i data-lucide="skip-back" class="w-6 h-6"></i></button>
+                            <button onclick="togglePlay()" id="play-btn" class="w-14 h-14 bg-brand-red rounded-full flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform shadow-[0_0_15px_#CB170F]">
                                 <i data-lucide="play" class="fill-current ml-1 w-6 h-6"></i>
                             </button>
-                            <button onclick="nextTrack()" class="text-brand-silver hover:text-white p-2"><i data-lucide="skip-forward" class="w-6 h-6"></i></button>
+                            <button onclick="nextTrack()" class="text-brand-silver hover:text-white p-2 transform active:scale-90"><i data-lucide="skip-forward" class="w-6 h-6"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Playlist -->
-            <div class="mt-6 bg-brand-black border border-brand-silver/20 max-h-48 overflow-y-auto custom-scrollbar">
-                <div onclick="loadTrack(0)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm">
-                    <div class="flex items-center gap-2"><span class="text-brand-silver text-xs font-mono">01</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">What A Wonderful World</span></div>
+            <!-- Playlist Scrollable -->
+            <div class="mt-4 md:mt-6 bg-brand-black border border-brand-silver/20 max-h-48 overflow-y-auto custom-scrollbar">
+                <div onclick="loadTrack(0)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm transition-colors">
+                    <div class="flex items-center gap-2"><span class="text-brand-silver font-mono">01</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">What A Wonderful World</span></div>
                     <span class="text-xs text-brand-green font-bold">2025</span>
                 </div>
-                <div onclick="loadTrack(1)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm">
-                    <div class="flex items-center gap-2"><span class="text-brand-silver text-xs font-mono">02</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Lo Dudo (feat. Calmese Banda Brava)</span></div>
+                <div onclick="loadTrack(1)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm transition-colors">
+                    <div class="flex items-center gap-2"><span class="text-brand-silver font-mono">02</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Lo Dudo (feat. Calmese Banda Brava)</span></div>
                     <span class="text-xs text-brand-silver">Single</span>
                 </div>
-                <div onclick="loadTrack(2)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm">
-                    <div class="flex items-center gap-2"><span class="text-brand-silver text-xs font-mono">03</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Meskalina</span></div>
+                <div onclick="loadTrack(2)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm transition-colors">
+                    <div class="flex items-center gap-2"><span class="text-brand-silver font-mono">03</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Meskalina</span></div>
                     <span class="text-xs text-brand-silver">UFO</span>
                 </div>
-                <div onclick="loadTrack(3)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm">
-                    <div class="flex items-center gap-2"><span class="text-brand-silver text-xs font-mono">04</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Alienígena</span></div>
+                <div onclick="loadTrack(3)" class="p-3 border-b border-brand-grey flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm transition-colors">
+                    <div class="flex items-center gap-2"><span class="text-brand-silver font-mono">04</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Alienígena</span></div>
                     <span class="text-xs text-brand-silver">UFO</span>
                 </div>
-                <div onclick="loadTrack(4)" class="p-3 flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm">
-                    <div class="flex items-center gap-2"><span class="text-brand-silver text-xs font-mono">05</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Bésame (feat. Roco)</span></div>
+                <div onclick="loadTrack(4)" class="p-3 flex justify-between items-center hover:bg-brand-grey cursor-pointer group text-sm transition-colors">
+                    <div class="flex items-center gap-2"><span class="text-brand-silver font-mono">05</span><span class="text-white font-tech group-hover:text-brand-red truncate max-w-[200px]">Bésame (feat. Roco)</span></div>
                     <span class="text-xs text-brand-silver">Elementos</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Discografía Timeline -->
+    <!-- Discografía Timeline (Enlaces Reales) -->
     <section class="py-12 md:py-16 bg-brand-black border-t-8 border-brand-red relative">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="font-graffiti text-3xl md:text-5xl text-brand-white mb-6 md:mb-8 text-outline">DISCOGRAFÍA <span class="text-brand-red">OFICIAL</span></h2>
             
             <div class="flex overflow-x-auto gap-4 md:gap-6 pb-8 no-scrollbar snap-x snap-mandatory">
-                <!-- 1. Demo X (MOSAICO CASSETTE) -->
+                <!-- 1. Demo X -->
                 <a href="https://open.spotify.com/album/3JSnauleX78JJlU5bxqYpf?si=7ZHZXi8hRQ-rSaUyWU5KwA" target="_blank" class="min-w-[85vw] md:min-w-[300px] snap-center bg-brand-grey border border-brand-silver/20 p-5 md:p-6 flex flex-col rounded-sm hover:border-brand-red transition-colors block text-left group">
                     <div class="flex justify-between items-start mb-2 md:mb-4">
                         <span class="text-4xl font-graffiti text-brand-silver/30">01</span>
@@ -509,7 +542,7 @@
         </div>
     </section>
 
-    <!-- Trayectoria y Tour (LISTA EXACTA) -->
+    <!-- Trayectoria y Tour (LISTA EXACTA y Optimizada Móvil) -->
     <section id="trajectory" class="py-12 md:py-16 bg-brand-white text-brand-black">
         <div class="max-w-6xl mx-auto px-4">
             <h2 class="font-graffiti text-3xl md:text-5xl mb-8 md:mb-12 text-center">FECHAS CLAVE Y <span class="text-brand-red">GIRA</span></h2>
@@ -517,153 +550,114 @@
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 mb-12">
                 <div>
                     <!-- Libro -->
-                    <div class="mb-6 p-4 bg-gray-100 border-l-4 border-brand-black">
-                        <h4 class="font-bold font-slogan uppercase text-sm">Registro Histórico</h4>
-                        <p class="font-tech text-xs md:text-sm">Aparición en el libro <strong>"Del Negro al Blanco: Breve historia del ska en México"</strong> (IMJUVE, 2000).</p>
+                    <div class="mb-6 p-4 bg-gray-100 border-l-4 border-brand-black shadow-sm rounded-sm">
+                        <h4 class="font-bold font-slogan uppercase text-sm mb-1">Registro Histórico</h4>
+                        <p class="font-tech text-xs md:text-sm text-gray-700">Aparición en el libro <strong>"Del Negro al Blanco: Breve historia del ska en México"</strong> (IMJUVE, 2000).</p>
                     </div>
 
                     <h3 class="font-slogan font-black text-xl mb-4 border-l-4 border-brand-red pl-4">Fechas Históricas & Recientes</h3>
-                    <div class="space-y-2 h-[350px] overflow-y-auto custom-scrollbar pr-2 text-sm md:text-base">
+                    <div class="space-y-2 h-[350px] overflow-y-auto custom-scrollbar pr-2 text-sm md:text-base bg-white border border-gray-100 rounded-sm p-2 shadow-inner">
                         <!-- Dates -->
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">DIC 1996</span>
-                            <span class="font-tech">Primer toquín: La Viuda (Toreo).</span>
+                            <span class="font-tech text-gray-800">Primer toquín: La Viuda (Toreo).</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">29 MAY 99</span>
-                            <span class="font-tech">Babel "El Lugar del Rock".</span>
+                            <span class="font-tech text-gray-800">Babel "El Lugar del Rock".</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">17 JUN 01</span>
-                            <span class="font-tech">Adiós Adiós por Europa (Alicia).</span>
+                            <span class="font-tech text-gray-800">Adiós Adiós por Europa (Alicia).</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">02 SEP 01</span>
-                            <span class="font-tech">Gran Skándalo.</span>
+                            <span class="font-tech text-gray-800">Gran Skándalo.</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-red w-20 shrink-0">27 NOV 04</span>
-                            <span class="font-tech">Presentación "Homenaje Maldito".</span>
+                            <span class="font-tech text-gray-800">Presentación "Homenaje Maldito".</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">29 JUL 23</span>
-                            <span class="font-tech">29 Años Royal Club.</span>
+                            <span class="font-tech text-gray-800">29 Años Royal Club.</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">06 SEP 25</span>
-                            <span class="font-tech">Xochiska.</span>
+                            <span class="font-tech text-gray-800">Xochiska.</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2 bg-brand-green/10">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 bg-brand-green/10 hover:bg-brand-green/20 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-green w-20 shrink-0">19 SEP 25</span>
-                            <span class="font-tech">Festival Vientos Calma (Colombia).</span>
+                            <span class="font-tech text-gray-800">Festival Vientos Calma (Colombia).</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2 bg-brand-green/10">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 bg-brand-green/10 hover:bg-brand-green/20 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-green w-20 shrink-0">21 SEP 25</span>
-                            <span class="font-tech">Festival Green Clouds (Colombia).</span>
+                            <span class="font-tech text-gray-800">Festival Green Clouds (Colombia).</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">17 OCT 25</span>
-                            <span class="font-tech">Festival Coyote.</span>
+                            <span class="font-tech text-gray-800">Festival Coyote.</span>
                         </div>
-                        <div class="flex gap-3 border-b border-gray-300 pb-2">
+                        <div class="flex gap-3 border-b border-gray-200 pb-2 hover:bg-gray-50 transition-colors p-2 rounded">
                             <span class="font-bold text-brand-black w-20 shrink-0">20 DIC 25</span>
-                            <span class="font-tech">Xochiska Navideño.</span>
+                            <span class="font-tech text-gray-800">Xochiska Navideño.</span>
                         </div>
                     </div>
 
-                    <!-- GALERÍA HISTÓRICA INSERTADA (NUEVA) -->
+                    <!-- GALERÍA HISTÓRICA INSERTADA (NUEVA - Full Flyers) -->
                     <div class="mt-6 border-t border-gray-300 pt-4">
                         <h4 class="font-bold font-slogan uppercase text-sm mb-3 text-brand-black flex items-center gap-2">
                             <i data-lucide="camera" class="w-4 h-4 text-brand-red"></i> Archivo Visual
                         </h4>
-                        <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar snap-x snap-mandatory">
-                            <div class="min-w-[120px] w-32 aspect-square bg-gray-200 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group" onclick="openLightbox(this)">
-                                <img src="IMAGENES/REUNION_FUERZAS.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Reunión de Fuerzas">
+                        <!-- Changed aspect-square to aspect-auto/h-48 and object-contain for full flyers -->
+                        <div class="flex overflow-x-auto gap-3 pb-2 no-scrollbar snap-x snap-mandatory h-48 md:h-56">
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center" onclick="openLightbox(this)">
+                                <img src="IMAGENES/REUNION_FUERZAS.jpg" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Reunión de Fuerzas">
                             </div>
-                            <div class="min-w-[120px] w-32 aspect-square bg-gray-200 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group" onclick="openLightbox(this)">
-                                <img src="IMAGENES/REVISTA_NUESTROROCK.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Revista Nuestro Rock">
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center" onclick="openLightbox(this)">
+                                <img src="IMAGENES/REVISTA_NUESTROROCK.jpg" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Revista Nuestro Rock">
                             </div>
-                            <div class="min-w-[120px] w-32 aspect-square bg-gray-200 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group" onclick="openLightbox(this)">
-                                <img src="IMAGENES/TOKIN.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Tokin Histórico 1">
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center" onclick="openLightbox(this)">
+                                <img src="IMAGENES/TOKIN.jpg" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Tokin Histórico 1">
                             </div>
-                            <div class="min-w-[120px] w-32 aspect-square bg-gray-200 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group" onclick="openLightbox(this)">
-                                <img src="IMAGENES/TOKIN2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Tokin Histórico 2">
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center" onclick="openLightbox(this)">
+                                <img src="IMAGENES/TOKIN2.jpg" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Tokin Histórico 2">
                             </div>
-                            <div class="min-w-[120px] w-32 aspect-square bg-gray-200 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group" onclick="openLightbox(this)">
-                                <img src="IMAGENES/TOKIN3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Tokin Histórico 3">
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center" onclick="openLightbox(this)">
+                                <img src="IMAGENES/TOKIN3.jpg" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Tokin Histórico 3">
                             </div>
-                            <div class="min-w-[120px] w-32 aspect-square bg-gray-200 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group" onclick="openLightbox(this)">
-                                <img src="IMAGENES/XOCHISKAA.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Xochiska">
+                            <div class="min-w-[120px] w-auto h-full bg-gray-100 snap-start rounded overflow-hidden cursor-zoom-in border border-gray-300 group flex items-center justify-center" onclick="openLightbox(this)">
+                                <img src="IMAGENES/XOCHISKAA.jpg" class="h-full w-auto object-contain group-hover:scale-105 transition-transform duration-500" alt="Xochiska">
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div>
-                    <!-- Collage -->
+                    <!-- Collage (Optimizado Flyers Completos) -->
                     <div class="grid grid-cols-2 gap-2 h-auto mb-8">
-                        <a href="https://youtu.be/usWChBR2jzA?si=34ebqh8ZhhsdDJS4" target="_blank" class="col-span-2 aspect-video bg-black relative group cursor-pointer overflow-hidden border-2 border-brand-red block">
-                             <!-- Changed maxresdefault to hqdefault to fix broken image -->
-                             <img src="https://img.youtube.com/vi/usWChBR2jzA/hqdefault.jpg" class="w-full h-full object-cover opacity-60 transition-opacity group-hover:opacity-80" alt="Video Bésame">
-                             <div class="absolute inset-0 flex items-center justify-center"><i data-lucide="play-circle" class="w-16 h-16 text-white"></i></div>
-                             <div class="absolute bottom-2 left-2 text-white font-bold text-sm">VIDEO OFICIAL: BÉSAME (2005)</div>
+                        <a href="https://youtu.be/usWChBR2jzA?si=34ebqh8ZhhsdDJS4" target="_blank" class="col-span-2 aspect-video bg-black relative group cursor-pointer overflow-hidden border-2 border-brand-red block shadow-lg">
+                             <img src="https://img.youtube.com/vi/usWChBR2jzA/hqdefault.jpg" class="w-full h-full object-cover opacity-70 transition-opacity group-hover:opacity-100" alt="Video Bésame">
+                             <div class="absolute inset-0 flex items-center justify-center"><div class="bg-red-600/80 rounded-full p-2 group-hover:scale-110 transition-transform"><i data-lucide="play" class="w-8 h-8 text-white fill-current"></i></div></div>
+                             <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-2 text-white font-bold text-xs md:text-sm">VIDEO OFICIAL: BÉSAME</div>
                         </a>
-                        <div class="aspect-square bg-gray-200 overflow-hidden relative cursor-zoom-in" onclick="openLightbox(this)">
-                             <img src="IMAGENES/GRUPO.png" class="w-full h-full object-cover transition-transform hover:scale-110" alt="Grupo">
+                        <!-- Changed object-cover to object-contain and added bg-gray-100 to frame flyers properly -->
+                        <div class="aspect-square bg-gray-100 overflow-hidden relative cursor-zoom-in flex items-center justify-center border border-gray-200" onclick="openLightbox(this)">
+                             <img src="IMAGENES/GRUPO.png" class="w-full h-full object-contain transition-transform hover:scale-105" alt="Grupo">
                         </div>
-                        <div class="aspect-square bg-gray-200 overflow-hidden relative cursor-zoom-in" onclick="openLightbox(this)">
-                             <img src="IMAGENES/LAST.jpg" class="w-full h-full object-cover transition-transform hover:scale-110" alt="Last">
+                        <div class="aspect-square bg-gray-100 overflow-hidden relative cursor-zoom-in flex items-center justify-center border border-gray-200" onclick="openLightbox(this)">
+                             <img src="IMAGENES/LAST.jpg" class="w-full h-full object-contain transition-transform hover:scale-105" alt="Last">
                         </div>
                     </div>
                     
                     <h3 class="font-slogan font-black text-xl mb-2 border-l-4 border-brand-black pl-4">Compartiendo Escenario</h3>
                     <div class="flex flex-wrap gap-2 text-sm font-tech">
-                        <span class="bg-gray-200 px-2 py-1">Maldita Vecindad</span>
-                        <span class="bg-gray-200 px-2 py-1">Panteón Rococó</span>
-                        <span class="bg-gray-200 px-2 py-1">Víctimas del Dr. Cerebro</span>
-                        <span class="bg-gray-200 px-2 py-1">Sekta Core</span>
-                        <span class="bg-gray-200 px-2 py-1">Royal Club</span>
-                        <span class="bg-gray-200 px-2 py-1">Kenny y los Eléctricos</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Nueva Galería de Eventos (Scroll Horizontal) -->
-            <div class="mt-12">
-                <h3 class="font-graffiti text-2xl md:text-3xl mb-6 text-center text-outline">GALERÍA DE <span class="text-brand-green">EVENTOS</span></h3>
-                <div class="flex overflow-x-auto gap-4 pb-6 no-scrollbar snap-x snap-mandatory">
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/29_ANOS_ROYAL.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="29 Años Royal">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/ADIOS_ADIOS_PE.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Adiós Adiós">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/BABEL.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Babel">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/FESTIVAL_COYOTE.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Festival Coyote">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/FESTIVAL_GREEN_CLOUDS_COLOMBIA.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Green Clouds">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/GRAN_SKANDALO.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Gran Skandalo">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/HOMENAJE_MALDITO.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Homenaje Maldito">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/LO_DUDO.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Lo Dudo">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/MASIVO_CU.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Masivo CU">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/VIENTOS_CALMA_COLOMBIA.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Vientos Calma">
-                    </div>
-                    <div class="min-w-[200px] md:min-w-[250px] snap-center aspect-[3/4] bg-gray-900 border border-brand-silver/20 rounded overflow-hidden group">
-                        <img src="EVENTOS/XOCHISKA_NAV.jpg" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity hover:scale-105 duration-500" alt="Xochiska Nav">
+                        <span class="bg-gray-200 px-3 py-1 rounded-sm text-xs md:text-sm font-bold text-gray-700">Maldita Vecindad</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-sm text-xs md:text-sm font-bold text-gray-700">Panteón Rococó</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-sm text-xs md:text-sm font-bold text-gray-700">Víctimas del Dr. Cerebro</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-sm text-xs md:text-sm font-bold text-gray-700">Sekta Core</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-sm text-xs md:text-sm font-bold text-gray-700">Royal Club</span>
+                        <span class="bg-gray-200 px-3 py-1 rounded-sm text-xs md:text-sm font-bold text-gray-700">Kenny y los Eléctricos</span>
                     </div>
                 </div>
             </div>
@@ -675,80 +669,80 @@
         <div class="max-w-6xl mx-auto px-4 relative z-10">
             <h2 class="font-graffiti text-3xl md:text-5xl mb-8 text-center text-outline">COLABORACIONES <span class="text-brand-green">HISTÓRICAS</span></h2>
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-                <!-- Items -->
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 animate-fade-in-up">
+                <!-- Items with hover effects -->
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-brand-red font-black text-sm md:text-lg">ROCO</div>
-                    <div class="text-[10px] text-brand-silver">Maldita Vecindad</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Maldita Vecindad</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-brand-red font-black text-sm md:text-lg">SAX</div>
-                    <div class="text-[10px] text-brand-silver">Maldita Vecindad</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Maldita Vecindad</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-brand-red font-black text-sm md:text-lg">ALDO "PATO"</div>
-                    <div class="text-[10px] text-brand-silver">Maldita Vecindad</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Maldita Vecindad</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-brand-green font-black text-sm md:text-lg">PIOLÍN</div>
-                    <div class="text-[10px] text-brand-silver">Panteón Rococó</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Panteón Rococó</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-brand-green font-black text-sm md:text-lg leading-tight">MISAEL OSOGUERA</div>
-                    <div class="text-[10px] text-brand-silver">Panteón Rococó</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Panteón Rococó</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">ABULÓN</div>
-                    <div class="text-[10px] text-brand-silver">Víctimas</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Víctimas</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">CHIPOTLE</div>
-                    <div class="text-[10px] text-brand-silver">Víctimas</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Víctimas</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">KOTARDO</div>
-                    <div class="text-[10px] text-brand-silver">Sekta Core</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Sekta Core</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">JORGE SALCEDO</div>
-                    <div class="text-[10px] text-brand-silver">Sekta Core</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Sekta Core</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-brand-red font-black text-sm md:text-lg">KENNY</div>
-                    <div class="text-[10px] text-brand-silver">Kenny y Los Eléctricos</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Kenny y Los Eléctricos</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">BENJI</div>
-                    <div class="text-[10px] text-brand-silver">Royal Club</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Royal Club</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">RAFA</div>
-                    <div class="text-[10px] text-brand-silver">Royal Club</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Royal Club</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">YOCU ORELLANO</div>
-                    <div class="text-[10px] text-brand-silver">Los de Abajo</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Los de Abajo</div>
                 </div>
                 <!-- Otros -->
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">FLOR ROMERO</div>
-                    <div class="text-[10px] text-brand-silver">Colaboración</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Colaboración</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">JENNIFER RAMÍREZ</div>
-                    <div class="text-[10px] text-brand-silver">Colaboración</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Colaboración</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">AMANDITITITA/ALENA</div>
-                    <div class="text-[10px] text-brand-silver">Colaboración</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Colaboración</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">PONCHITO MACIEL</div>
-                    <div class="text-[10px] text-brand-silver">Colaboración</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Colaboración</div>
                 </div>
-                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded">
+                <div class="bg-brand-grey border border-brand-silver/20 p-3 rounded hover:bg-white/5 transition-colors">
                     <div class="text-white font-black text-sm md:text-lg">RAFA CEPEDA</div>
-                    <div class="text-[10px] text-brand-silver">Colaboración</div>
+                    <div class="text-[10px] text-brand-silver uppercase tracking-wider">Colaboración</div>
                 </div>
             </div>
         </div>
@@ -789,15 +783,15 @@
             <h2 class="font-graffiti text-3xl md:text-5xl text-center mb-6">COTIZA <span class="text-brand-red">AHORA</span></h2>
             <div class="bg-brand-grey border border-brand-silver/20 p-6 rounded-xl shadow-lg">
                 <div class="grid gap-4 mb-6">
-                    <select id="event-type" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm">
+                    <select id="event-type" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm focus:border-brand-red outline-none">
                         <option value="Festival">Festival Masivo</option>
                         <option value="Show Privado">Evento Privado</option>
                         <option value="Club/Bar">Club / Venue</option>
                         <option value="Feria">Feria del Pueblo</option>
                     </select>
                     <div class="grid grid-cols-2 gap-4">
-                        <input type="text" id="event-city" placeholder="Ciudad" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm">
-                        <input type="date" id="event-date" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm">
+                        <input type="text" id="event-city" placeholder="Ciudad" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm focus:border-brand-red outline-none">
+                        <input type="date" id="event-date" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm focus:border-brand-red outline-none">
                     </div>
                 </div>
                 <button onclick="sendWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-4 rounded flex items-center justify-center gap-3 transition-colors text-base shadow-lg active:scale-95">
@@ -816,7 +810,7 @@
 
     <!-- Modal Lightbox -->
     <div id="lightbox" class="fixed inset-0 z-[60] bg-black/95 hidden items-center justify-center p-4" onclick="closeLightbox()">
-        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain">
+        <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain shadow-2xl">
         <button class="absolute top-4 right-4 text-white hover:text-brand-red p-4"><i data-lucide="x" class="w-8 h-8"></i></button>
     </div>
 
