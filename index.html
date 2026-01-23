@@ -321,7 +321,8 @@
                     <div class="flex gap-3 border-b-2 border-white/10 mb-6 overflow-x-auto no-scrollbar pb-2">
                         <button onclick="switchTab('short')" id="btn-short" class="flex-shrink-0 pb-2 px-3 font-bold font-slogan text-brand-red border-b-4 border-brand-red transition-all whitespace-nowrap text-sm md:text-base">BIO CORTA</button>
                         <button onclick="switchTab('long')" id="btn-long" class="flex-shrink-0 pb-2 px-3 font-bold font-slogan text-gray-400 hover:text-brand-red transition-all whitespace-nowrap text-sm md:text-base">LÍNEA DE TIEMPO</button>
-                        <button onclick="switchTab('news')" id="btn-news" class="flex-shrink-0 pb-2 px-3 font-bold font-slogan text-brand-green hover:text-brand-black transition-all whitespace-nowrap text-sm md:text-base">NOVEDADES 2025</button>
+                        <!-- CORREGIDO: Botón inicializado en estado inactivo (gris) para consistencia -->
+                        <button onclick="switchTab('news')" id="btn-news" class="flex-shrink-0 pb-2 px-3 font-bold font-slogan text-gray-400 hover:text-brand-green transition-all whitespace-nowrap text-sm md:text-base">NOVEDADES 2025</button>
                     </div>
 
                     <!-- Bio Corta (Textos Claros) -->
@@ -1600,26 +1601,42 @@
 
         // Tabs
         function switchTab(tab) {
+            // 1. Ocultar todos los contenidos
             document.getElementById('content-short').classList.add('hidden');
             document.getElementById('content-long').classList.add('hidden');
             document.getElementById('content-news').classList.add('hidden');
             
-            document.getElementById('btn-short').classList.replace('text-brand-red', 'text-brand-grey');
-            document.getElementById('btn-short').classList.remove('border-b-4', 'border-brand-red');
-            document.getElementById('btn-long').classList.replace('text-brand-red', 'text-brand-grey'); // Corregido para estado inactivo
-            document.getElementById('btn-long').classList.remove('border-b-4', 'border-brand-red');
-            document.getElementById('btn-news').classList.replace('text-brand-green', 'text-brand-green'); 
+            // 2. Referencias a botones
+            const btnShort = document.getElementById('btn-short');
+            const btnLong = document.getElementById('btn-long');
+            const btnNews = document.getElementById('btn-news');
+
+            // 3. Resetear TODOS los botones a estado INACTIVO (Gris, sin borde)
+            // Bio Corta
+            btnShort.classList.remove('text-brand-red', 'border-b-4', 'border-brand-red');
+            btnShort.classList.add('text-gray-400');
             
+            // Línea de Tiempo
+            btnLong.classList.remove('text-brand-red', 'border-b-4', 'border-brand-red');
+            btnLong.classList.add('text-gray-400');
+            
+            // Novedades
+            btnNews.classList.remove('text-brand-green', 'border-b-4', 'border-brand-green');
+            btnNews.classList.add('text-gray-400');
+            
+            // 4. Activar el botón y contenido seleccionado
             if (tab === 'short') {
                 document.getElementById('content-short').classList.remove('hidden');
-                document.getElementById('btn-short').classList.replace('text-brand-grey', 'text-brand-red');
-                document.getElementById('btn-short').classList.add('border-b-4', 'border-brand-red');
+                btnShort.classList.remove('text-gray-400');
+                btnShort.classList.add('text-brand-red', 'border-b-4', 'border-brand-red');
             } else if (tab === 'long') {
                 document.getElementById('content-long').classList.remove('hidden');
-                document.getElementById('btn-long').classList.replace('text-brand-grey', 'text-brand-red'); // Estado activo
-                document.getElementById('btn-long').classList.add('border-b-4', 'border-brand-red');
+                btnLong.classList.remove('text-gray-400');
+                btnLong.classList.add('text-brand-red', 'border-b-4', 'border-brand-red');
             } else {
                 document.getElementById('content-news').classList.remove('hidden');
+                btnNews.classList.remove('text-gray-400');
+                btnNews.classList.add('text-brand-green', 'border-b-4', 'border-brand-green');
             }
         }
 
