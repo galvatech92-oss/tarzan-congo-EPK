@@ -1236,8 +1236,8 @@
         </div>
     </div>
 
-    <!-- Modal Lightbox -->
-    <div id="lightbox" class="fixed inset-0 z-[60] bg-black/95 hidden items-center justify-center p-4" onclick="closeLightbox()">
+    <!-- Modal Lightbox (CORREGIDO: Z-INDEX AUMENTADO A 100 PARA QUE SALGA ENCIMA DE TODO) -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-black/95 hidden items-center justify-center p-4" onclick="closeLightbox()">
         <img id="lightbox-img" src="" class="max-w-full max-h-[90vh] object-contain shadow-2xl">
         <button class="absolute top-4 right-4 text-white hover:text-brand-red p-4"><i data-lucide="x" class="w-8 h-8"></i></button>
     </div>
