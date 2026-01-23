@@ -936,11 +936,12 @@
                     <span class="text-[10px] text-gray-500">HD (VER LISTA)</span>
                 </button>
 
-                <a href="#" class="bg-brand-black p-4 border border-brand-silver/10 active:border-brand-red rounded flex flex-col items-center justify-center h-32 active:scale-95 transition-transform shadow-lg">
+                <!-- BOTÓN LOGOS MODIFICADO: AHORA ABRE LA LISTA DE LOGOS -->
+                <button onclick="openLogoAssetsModal()" class="bg-brand-black p-4 border border-brand-silver/10 active:border-brand-red rounded flex flex-col items-center justify-center h-32 active:scale-95 transition-transform shadow-lg cursor-pointer hover:bg-white/5">
                     <i data-lucide="pen-tool" class="w-8 h-8 text-brand-red mb-2"></i>
                     <span class="font-bold text-white text-xs">LOGOS</span>
-                    <span class="text-[10px] text-gray-500">PNG</span>
-                </a>
+                    <span class="text-[10px] text-gray-500">PNG (VER LISTA)</span>
+                </button>
             </div>
             
             <!-- SECCIÓN DE GALERÍA ELIMINADA (Para que todo esté en el modal) -->
@@ -1158,6 +1159,79 @@
                         </a>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NUEVO MODAL PARA LA LISTA DE LOGOS -->
+    <div id="logo-assets-modal" class="fixed inset-0 z-[70] bg-black/95 hidden items-center justify-center p-4 backdrop-blur-sm animate-fade-in-up">
+        <div class="bg-[#151515] border-2 border-brand-red/50 p-6 rounded-lg max-w-2xl w-full shadow-[0_0_30px_rgba(203,23,15,0.3)] relative max-h-[80vh] overflow-hidden flex flex-col">
+            <button onclick="closeLogoAssetsModal()" class="absolute top-4 right-4 text-gray-500 hover:text-white z-10">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <h3 class="font-graffiti text-2xl md:text-3xl text-white mb-6 border-b border-white/10 pb-4 flex items-center gap-3">
+                <i data-lucide="pen-tool" class="text-brand-red"></i> LOGOS OFICIALES PNG
+            </h3>
+            
+            <div class="overflow-y-auto custom-scrollbar pr-2 flex flex-col gap-2 font-tech">
+                
+                <!-- Logo 1 -->
+                <div class="flex items-center justify-between bg-black/40 border border-white/10 p-3 rounded hover:border-brand-red transition-colors group">
+                    <span class="text-gray-300 font-bold text-sm md:text-base group-hover:text-white truncate uppercase tracking-wider flex-1 text-left">Logo Oficial 1</span>
+                    <div class="flex items-center gap-4 shrink-0">
+                        <button onclick="openLightbox(this)" class="text-brand-silver hover:text-white transition-colors" title="Previsualizar">
+                            <img src="LOGOS/TARZAN1.png" onerror="this.src='https://placehold.co/800x400/1F1E1F/CB170F?text=Logo1'" class="hidden">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                        <a href="LOGOS/TARZAN1.png" download class="text-brand-silver hover:text-brand-green transition-colors" title="Descargar">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Logo 2 -->
+                <div class="flex items-center justify-between bg-black/40 border border-white/10 p-3 rounded hover:border-brand-red transition-colors group">
+                    <span class="text-gray-300 font-bold text-sm md:text-base group-hover:text-white truncate uppercase tracking-wider flex-1 text-left">Logo Oficial 2</span>
+                    <div class="flex items-center gap-4 shrink-0">
+                        <button onclick="openLightbox(this)" class="text-brand-silver hover:text-white transition-colors" title="Previsualizar">
+                            <img src="LOGOS/LOGO2.png" onerror="this.src='https://placehold.co/800x400/1F1E1F/CB170F?text=Logo2'" class="hidden">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                        <a href="LOGOS/LOGO2.png" download class="text-brand-silver hover:text-brand-green transition-colors" title="Descargar">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Logo 3 -->
+                <div class="flex items-center justify-between bg-black/40 border border-white/10 p-3 rounded hover:border-brand-red transition-colors group">
+                    <span class="text-gray-300 font-bold text-sm md:text-base group-hover:text-white truncate uppercase tracking-wider flex-1 text-left">Logo Oficial 3</span>
+                    <div class="flex items-center gap-4 shrink-0">
+                        <button onclick="openLightbox(this)" class="text-brand-silver hover:text-white transition-colors" title="Previsualizar">
+                            <img src="LOGOS/LOGO3.png" onerror="this.src='https://placehold.co/800x400/1F1E1F/CB170F?text=Logo3'" class="hidden">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                        <a href="LOGOS/LOGO3.png" download class="text-brand-silver hover:text-brand-green transition-colors" title="Descargar">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Logo 4 -->
+                <div class="flex items-center justify-between bg-black/40 border border-white/10 p-3 rounded hover:border-brand-red transition-colors group">
+                    <span class="text-gray-300 font-bold text-sm md:text-base group-hover:text-white truncate uppercase tracking-wider flex-1 text-left">Logo Oficial 4</span>
+                    <div class="flex items-center gap-4 shrink-0">
+                        <button onclick="openLightbox(this)" class="text-brand-silver hover:text-white transition-colors" title="Previsualizar">
+                            <img src="LOGOS/LOGO4.png" onerror="this.src='https://placehold.co/800x400/1F1E1F/CB170F?text=Logo4'" class="hidden">
+                            <i data-lucide="eye" class="w-5 h-5"></i>
+                        </button>
+                        <a href="LOGOS/LOGO4.png" download class="text-brand-silver hover:text-brand-green transition-colors" title="Descargar">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -1448,6 +1522,14 @@
         }
         function closePhotoAssetsModal() {
             document.getElementById('photo-assets-modal').classList.replace('flex', 'hidden');
+        }
+
+        // Funciones para el Modal de LOGOS Assets
+        function openLogoAssetsModal() {
+            document.getElementById('logo-assets-modal').classList.replace('hidden', 'flex');
+        }
+        function closeLogoAssetsModal() {
+            document.getElementById('logo-assets-modal').classList.replace('flex', 'hidden');
         }
 
         // Copy Bio
