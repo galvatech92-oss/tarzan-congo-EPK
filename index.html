@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rajdhani:wght@300;500;600;700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Rajdhani:wght@300;500;600;700;900&family=Montserrat:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <script>
@@ -30,6 +30,7 @@
                         'graffiti': ['Permanent Marker', 'cursive'],
                         'tech': ['Rajdhani', 'sans-serif'],
                         'slogan': ['Montserrat', 'sans-serif'],
+                        'bebas': ['"Bebas Neue"', 'sans-serif'],
                     },
                     backgroundImage: {
                         'noise': "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc1JyBoZWlnaHQ9JzUnPgo8cmVjdCB3aWR0aD0nNScgaGVpZ2h0PSc1JyBmaWxsPScjZmZmJyBmaWxsLW9wYWNpdHk9JzAuMDMnLz4KPC9zdmc+')",
@@ -185,10 +186,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16 md:h-20">
                 <a href="#" class="flex items-center gap-2 group z-50">
-                    <!-- Logo simulado texto -->
-                    <span class="font-graffiti text-xl md:text-3xl text-brand-white tracking-wider group-hover:text-brand-red transition-colors drop-shadow-md">
-                        TARZAN CONGO
-                    </span>
+                    <img src="LOGOS/LOGO3.png" alt="Tarzan Congo" class="h-10 md:h-14 w-auto object-contain hover:scale-105 transition-transform duration-300 drop-shadow-md">
                 </a>
                 
                 <!-- Desktop Menu Estilizado -->
@@ -256,7 +254,7 @@
             </div>
 
             <!-- Título -->
-            <h1 class="font-graffiti text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-brand-white mb-2 text-outline drop-shadow-2xl animate-fade-in-up text-center leading-[0.85]">
+            <h1 class="font-bebas text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] text-brand-white mb-2 text-outline drop-shadow-2xl animate-fade-in-up text-center leading-[0.85]">
                 TARZAN<br><span class="text-brand-red">CONGO</span>
             </h1>
 
@@ -322,7 +320,7 @@
                 <!-- Columna Derecha: Historia -->
                 <div class="md:col-span-8">
                     <div class="flex flex-col gap-4 mb-6">
-                        <h2 class="font-graffiti text-4xl md:text-5xl text-white text-center md:text-left drop-shadow-md">HISTORIA OFICIAL</h2>
+                        <h2 class="font-bebas text-5xl md:text-6xl text-white text-center md:text-left drop-shadow-md">HISTORIA OFICIAL</h2>
                         <button onclick="copyBio()" class="w-full md:w-auto bg-brand-grey border border-white/20 text-white text-xs px-4 py-3 md:py-2 flex items-center justify-center gap-2 hover:bg-brand-red transition-colors rounded active:scale-95 shadow-md">
                             <i data-lucide="copy" class="w-4 h-4"></i> COPIAR TEXTO
                         </button>
@@ -476,7 +474,7 @@
                 <div class="relative group w-full border-4 border-brand-red p-1 bg-black/50 shadow-[0_0_20px_#CB170F]">
                     <img src="IMAGENES/INTG.jpg" onerror="this.src='https://placehold.co/1200x600/1F1E1F/CB170F?text=Integrantes+Tarzan+Congo'" class="w-full h-auto object-cover transition-all duration-500 hover:scale-105" alt="Integrantes Tarzan Congo">
                     <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black to-transparent p-4">
-                        <h3 class="font-graffiti text-2xl text-white text-center">LA FAMILIA CONGO</h3>
+                        <h3 class="font-bebas text-3xl text-white text-center">LA FAMILIA CONGO</h3>
                     </div>
                 </div>
             </div>
@@ -486,7 +484,7 @@
     <!-- Reproductor -->
     <section id="music" class="py-12 md:py-16 bg-[#050505]/90 border-y border-brand-red/20 backdrop-blur-sm reveal-on-scroll">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="font-graffiti text-3xl md:text-4xl text-brand-white mb-6 md:mb-8 flex items-center justify-center md:justify-start gap-3">
+            <h2 class="font-bebas text-4xl md:text-5xl text-brand-white mb-6 md:mb-8 flex items-center justify-center md:justify-start gap-3">
                 <i data-lucide="disc" class="animate-spin-slow text-brand-red"></i> SONIDO OFICIAL
             </h2>
             
@@ -555,7 +553,7 @@
     <!-- Discografía Timeline -->
     <section class="py-12 md:py-16 bg-brand-black/90 border-t-8 border-brand-red relative backdrop-blur-md reveal-on-scroll">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="font-graffiti text-3xl md:text-5xl text-brand-white mb-6 md:mb-8 text-outline">DISCOGRAFÍA <span class="text-brand-red">OFICIAL</span></h2>
+            <h2 class="font-bebas text-4xl md:text-6xl text-brand-white mb-6 md:mb-8 text-outline">DISCOGRAFÍA <span class="text-brand-red">OFICIAL</span></h2>
             
             <div class="relative group">
                 <div class="flex overflow-x-auto gap-4 md:gap-6 pb-8 no-scrollbar snap-x snap-mandatory" onscroll="hideScrollHint(this)">
@@ -712,7 +710,7 @@
     <!-- NUEVA SECCIÓN: INTEGRANTES OFICIALES (CORREGIDA SIN FILTRO Y CON ZOOM) -->
     <section id="members" class="py-12 md:py-16 bg-black border-t border-brand-red relative reveal-on-scroll">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="font-graffiti text-3xl md:text-5xl text-brand-white mb-8 text-center text-outline">INTEGRANTES <span class="text-brand-red">OFICIALES</span></h2>
+            <h2 class="font-bebas text-4xl md:text-6xl text-brand-white mb-8 text-center text-outline">INTEGRANTES <span class="text-brand-red">OFICIALES</span></h2>
             
             <!-- Grid de Tarjetas Largas -->
             <div class="flex overflow-x-auto pb-8 gap-4 no-scrollbar md:grid md:grid-cols-4 md:overflow-visible" onscroll="hideScrollHint(this)">
@@ -723,7 +721,7 @@
                     <img src="INTEGRANTES/1.jpg" onerror="this.src='https://placehold.co/400x700/101010/CB170F?text=Vocalista'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <!-- Degradado sutil solo abajo para texto -->
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-red bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">MIGUEL ZEA</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">MIGUEL ZEA</h3>
                         <p class="font-tech text-brand-red tracking-widest text-sm">VOZ</p>
                     </div>
                 </div>
@@ -732,7 +730,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/2.jpg" onerror="this.src='https://placehold.co/400x700/101010/39FF14?text=Guitarrista+1'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-green bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">RODRIGO ESPINOZA (RIGO)</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">RODRIGO ESPINOZA (RIGO)</h3>
                         <p class="font-tech text-brand-green tracking-widest text-sm">GUITARRA</p>
                     </div>
                 </div>
@@ -741,7 +739,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/3.jpg" onerror="this.src='https://placehold.co/400x700/101010/FFFFFF?text=Saxofonista'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-white bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">PABLO OCEJO JASSO</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">PABLO OCEJO JASSO</h3>
                         <p class="font-tech text-brand-silver tracking-widest text-sm">SAX</p>
                     </div>
                 </div>
@@ -750,7 +748,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/4.jpg" onerror="this.src='https://placehold.co/400x700/101010/CB170F?text=Trompetista'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-red bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">ALLAN JARDON ORTIZ</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">ALLAN JARDON ORTIZ</h3>
                         <p class="font-tech text-brand-red tracking-widest text-sm">TROMPETA</p>
                     </div>
                 </div>
@@ -759,7 +757,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/5.jpg" onerror="this.src='https://placehold.co/400x700/101010/39FF14?text=Trombonista'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-green bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">DANIEL OCEJO JASSO</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">DANIEL OCEJO JASSO</h3>
                         <p class="font-tech text-brand-green tracking-widest text-sm">TROMBÓN</p>
                     </div>
                 </div>
@@ -768,7 +766,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/6.jpg" onerror="this.src='https://placehold.co/400x700/101010/FFFFFF?text=Bajista'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-white bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">BRYAN A. CASTRO PIEDRA (TRAOUR)</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">BRYAN A. CASTRO PIEDRA (TRAOUR)</h3>
                         <p class="font-tech text-brand-silver tracking-widest text-sm">BAJO</p>
                     </div>
                 </div>
@@ -777,7 +775,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/7.jpg" onerror="this.src='https://placehold.co/400x700/101010/CB170F?text=Guitarrista+2'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-red bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">BETO DE LA PAZ</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">BETO DE LA PAZ</h3>
                         <p class="font-tech text-brand-red tracking-widest text-sm">GUITARRA</p>
                     </div>
                 </div>
@@ -786,7 +784,7 @@
                 <div class="min-w-[280px] md:min-w-0 relative group h-[500px] border border-brand-grey bg-brand-black overflow-hidden shadow-lg">
                     <img src="INTEGRANTES/8.jpg" onerror="this.src='https://placehold.co/400x700/101010/39FF14?text=Baterista'" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
                     <div class="absolute bottom-0 left-0 w-full p-6 border-t-4 border-brand-green bg-gradient-to-t from-black via-black/80 to-transparent">
-                        <h3 class="font-graffiti text-2xl text-brand-white mb-1">AMAURY ZEA</h3>
+                        <h3 class="font-bebas text-3xl text-brand-white mb-1">AMAURY ZEA</h3>
                         <p class="font-tech text-brand-green tracking-widest text-sm">EL BATERISTA MAYA</p>
                     </div>
                 </div>
@@ -801,7 +799,7 @@
     <!-- Trayectoria y Tour (FONDO OSCURO DINÁMICO) -->
     <section id="trajectory" class="py-12 md:py-16 relative bg-transparent reveal-on-scroll"> <!-- Transparente para dejar ver el fondo global -->
         <div class="max-w-6xl mx-auto px-4">
-            <h2 class="font-graffiti text-3xl md:text-5xl mb-8 md:mb-12 text-center text-white">FECHAS CLAVE Y <span class="text-brand-red">GIRA</span></h2>
+            <h2 class="font-bebas text-4xl md:text-6xl mb-8 md:mb-12 text-center text-white">FECHAS CLAVE Y <span class="text-brand-red">GIRA</span></h2>
             
             <div class="grid md:grid-cols-2 gap-8 md:gap-12 mb-12">
                 <!-- Agregado min-w-0 para corregir el desbordamiento del scroll de la galería -->
@@ -936,7 +934,7 @@
                 
                 <!-- LUGARES -->
                 <div class="bg-[#101010] border border-brand-red/30 p-6 rounded-sm shadow-[0_0_15px_rgba(203,23,15,0.2)] backdrop-blur-sm relative group">
-                    <h3 class="font-graffiti text-2xl md:text-3xl text-brand-white mb-6 flex items-center gap-2 border-b border-brand-red/50 pb-2">
+                    <h3 class="font-bebas text-3xl md:text-4xl text-brand-white mb-6 flex items-center gap-2 border-b border-brand-red/50 pb-2">
                         <i data-lucide="map" class="text-brand-red"></i> LUGARES PRESENTADOS
                     </h3>
                     <div class="h-80 overflow-y-auto custom-scrollbar pr-2" onscroll="hideScrollHint(this)">
@@ -951,7 +949,7 @@
 
                 <!-- MEDIOS -->
                 <div class="bg-[#101010] border border-brand-green/30 p-6 rounded-sm shadow-[0_0_15px_rgba(57,255,20,0.2)] backdrop-blur-sm relative group">
-                    <h3 class="font-graffiti text-2xl md:text-3xl text-brand-white mb-6 flex items-center gap-2 border-b border-brand-green/50 pb-2">
+                    <h3 class="font-bebas text-3xl md:text-4xl text-brand-white mb-6 flex items-center gap-2 border-b border-brand-green/50 pb-2">
                         <i data-lucide="tv" class="text-brand-green"></i> APARICIONES TV/MEDIOS
                     </h3>
                     <ul class="font-tech text-gray-400 text-sm md:text-base space-y-3 h-80 overflow-y-auto custom-scrollbar pr-2" onscroll="hideScrollHint(this)">
@@ -978,7 +976,7 @@
     <!-- Colaboraciones (Grid Móvil) -->
     <section id="collaborations" class="py-12 md:py-16 bg-black/80 text-white border-t border-brand-grey relative backdrop-blur-sm reveal-on-scroll">
         <div class="max-w-6xl mx-auto px-4 relative z-10">
-            <h2 class="font-graffiti text-3xl md:text-5xl mb-8 text-center text-outline">COLABORACIONES <span class="text-brand-green">HISTÓRICAS</span></h2>
+            <h2 class="font-bebas text-4xl md:text-6xl mb-8 text-center text-outline">COLABORACIONES <span class="text-brand-green">HISTÓRICAS</span></h2>
             
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 animate-fade-in-up">
                 <!-- Items with hover effects -->
@@ -1046,7 +1044,7 @@
     <!-- Assets (Botones Stackeados en Móvil) -->
     <section id="downloads" class="py-12 md:py-16 bg-[#1a1a1a]/90 border-t border-brand-black backdrop-blur-sm reveal-on-scroll">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="font-graffiti text-3xl md:text-4xl text-brand-white mb-6">PRESS ASSETS</h2>
+            <h2 class="font-bebas text-4xl md:text-5xl text-brand-white mb-6">PRESS ASSETS</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <!-- FULL PRESS KIT ACTUALIZADO -->
                 <a href="ASSETSTC.zip" download class="bg-brand-black p-4 border border-brand-silver/10 active:border-brand-red rounded flex flex-col items-center justify-center h-32 active:scale-95 transition-transform shadow-lg">
@@ -1084,7 +1082,7 @@
     <!-- NUEVA SECCIÓN: REDES SOCIALES (Antes de Booking) -->
     <section id="social" class="py-12 md:py-16 bg-[#0a0a0a] border-t border-brand-red/20 relative reveal-on-scroll">
         <div class="max-w-6xl mx-auto px-4 text-center">
-            <h2 class="font-graffiti text-3xl md:text-5xl text-white mb-8 text-outline">CONECTA CON <span class="text-brand-red">LA BANDA</span></h2>
+            <h2 class="font-bebas text-4xl md:text-6xl text-white mb-8 text-outline">CONECTA CON <span class="text-brand-red">LA BANDA</span></h2>
             
             <div class="flex flex-wrap justify-center gap-6 md:gap-8">
                 <!-- Facebook -->
@@ -1139,7 +1137,7 @@
     <!-- Booking -->
     <section id="booking" class="py-12 md:py-16 bg-brand-black/90 text-brand-white backdrop-blur-sm relative reveal-on-scroll">
         <div class="max-w-4xl mx-auto px-4">
-            <h2 class="font-graffiti text-3xl md:text-5xl text-center mb-6">COTIZA <span class="text-brand-red">AHORA</span></h2>
+            <h2 class="font-bebas text-4xl md:text-6xl text-center mb-6">COTIZA <span class="text-brand-red">AHORA</span></h2>
             <div class="bg-brand-grey border border-brand-silver/20 p-6 rounded-xl shadow-lg relative z-10">
                 <div class="grid gap-4 mb-6">
                     <select id="event-type" class="w-full bg-brand-black border border-brand-silver/30 text-white p-3 rounded text-sm focus:border-brand-red outline-none">
