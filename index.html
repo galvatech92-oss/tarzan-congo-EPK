@@ -353,7 +353,7 @@
                         <button onclick="switchTab('news')" id="btn-news" class="flex-shrink-0 pb-2 px-3 font-bold font-slogan text-gray-400 hover:text-brand-green transition-all whitespace-nowrap text-sm md:text-base">NOVEDADES 2025</button>
                     </div>
 
-                    <!-- Bio Corta (NUEVO TEXTO) -->
+                    <!-- Bio Corta -->
                     <div id="content-short" class="animate-fade-in-up bg-black/40 p-4 sm:p-6 rounded backdrop-blur-sm border-l-4 border-brand-red">
                         <p id="bio-text-short" class="font-tech text-sm sm:text-base md:text-xl text-gray-200 leading-relaxed font-medium text-justify">
                             TARZÁN CONGO es una de las propuestas más persistentes y combativas del ska mexicano. Formada en 1997, la banda ha construido una trayectoria de más de dos décadas de resistencia sonora, articulando una mezcla de ska, actitud y discurso social que la mantiene vigente dentro de la escena independiente.<br><br>
@@ -842,6 +842,48 @@
         </div>
     </section>
 
+    <!-- PRÓXIMO EVENTO DESTACADO -->
+    <section id="proximo-evento" class="py-16 md:py-24 bg-gradient-to-b from-[#1a0000] to-brand-black relative border-y border-brand-red shadow-[0_0_50px_rgba(203,23,15,0.2)] reveal-on-scroll w-full overflow-hidden z-20">
+        <div class="max-w-6xl mx-auto px-4 w-full relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="font-bebas text-5xl md:text-7xl text-brand-white text-outline tracking-wider animate-pulse">PRÓXIMO EVENTO</h2>
+            </div>
+            
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center bg-black/60 border border-brand-red/50 rounded-xl p-6 md:p-10 shadow-[0_0_30px_rgba(203,23,15,0.4)] backdrop-blur-sm">
+                <!-- Flyer -->
+                <div class="w-full md:w-1/2 flex justify-center">
+                    <img src="EVENTOS/tarzanxochimilco.jpg" onerror="this.src='https://placehold.co/600x800/1F1E1F/FF0000?text=Flyer+Xochimilco'" alt="Flyer 29 Aniversario Xochimilco" class="w-full max-w-md h-auto rounded-lg shadow-[0_0_20px_rgba(255,0,0,0.5)] border-2 border-brand-red hover:scale-105 transition-transform duration-500">
+                </div>
+                
+                <!-- Info -->
+                <div class="w-full md:w-1/2 flex flex-col justify-center text-center md:text-left">
+                    <p class="font-tech text-brand-green font-bold text-xl md:text-2xl mb-2 tracking-widest uppercase">Viernes 1° de Mayo</p>
+                    <h3 class="font-bebas text-4xl md:text-5xl text-white leading-none mb-4">
+                        EL FESTEJO DEL 29 ANIVERSARIO DE <span class="text-brand-red">TARZÁN CONGO</span> LLEGA A XOCHIMILCO
+                    </h3>
+                    
+                    <div class="mb-6">
+                        <p class="font-slogan font-bold text-brand-silver text-sm md:text-base uppercase tracking-widest mb-3 border-b border-brand-red/30 pb-2 inline-block">Con Grandes Invitados</p>
+                        <ul class="font-tech text-white text-lg md:text-xl space-y-1">
+                            <li>Kotardo</li>
+                            <li>RU2</li>
+                            <li>El Parto de la Chole</li>
+                            <li>Skandalosos Oficial</li>
+                            <li>Sonora Skaguamera</li>
+                            <li>Remedio Kasero</li>
+                            <li>WOTAM</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-brand-red/10 border-l-4 border-brand-red p-4 rounded-r mt-2">
+                        <p class="font-tech text-brand-white font-bold text-lg">Base Valentino</p>
+                        <p class="font-tech text-brand-silver text-sm mt-1">Av. Guadalupe I. Ramirez #628, Xochimilco, Mexico, 16050</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Trayectoria y Tour -->
     <section id="trajectory" class="py-12 md:py-16 relative bg-transparent reveal-on-scroll w-full overflow-hidden">
         <div class="max-w-6xl mx-auto px-4 w-full">
@@ -880,7 +922,8 @@
                             <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-brand-green">Fuck the Rack (Bogotá)</span></div>
                             <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-brand-green">Universidad de Tolima (Ibagué)</span></div>
                             <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-brand-green">Quito Bohemio (Quito, Ecuador)</span></div>
-                            <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-gray-300">Vientos de Calma – Rey Lagarto (Pasto, Colombia)</span></div>
+                            <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-brand-green">Festival de las Nubes Verdes (Ipiales, Colombia)</span></div>
+                            <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-brand-green">Vientos de Calma – Rey Lagarto (Pasto, Colombia)</span></div>
                             <div class="border-b border-white/10 pb-1 hover:bg-white/5 transition-colors px-2 py-1 rounded w-full"><span class="font-tech text-brand-white font-bold">Xochiska 2025</span></div>
                         </div>
                         <div class="scroll-hint absolute bottom-4 right-4 z-10 pointer-events-none animate-bounce bg-brand-red/90 text-white text-[10px] px-2 py-1 rounded shadow-lg uppercase font-bold flex items-center gap-1 transition-opacity duration-300">
